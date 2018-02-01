@@ -1,3 +1,6 @@
+import { DashboardRouting } from './views/dashboard/dashboard.routing';
+import { ProjectsViewModule } from './views/projects/projects-view.module';
+import { ProjectsViewComponent } from './views/projects/projects-view.component';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 import { BrowserModule  } from '@angular/platform-browser';
@@ -13,22 +16,22 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { UpgradeComponent } from './upgrade/upgrade.component';
 
 const routes: Routes =[
-    { path: 'dashboard',      component: DashboardComponent },
-    { path: 'user-profile',   component: UserProfileComponent },
+    { path: '',      component: ProjectsViewComponent },
+    { path: 'login',   component: UserProfileComponent },
     { path: 'table-list',     component: TableListComponent },
-    { path: 'typography',     component: TypographyComponent },
+    { path: 'projects/:id',     loadChildren: './views/dashboard/dashboard.routing#DashboardRouting' },
     { path: 'icons',          component: IconsComponent },
     { path: 'maps',           component: MapsComponent },
     { path: 'notifications',  component: NotificationsComponent },
-    { path: 'upgrade',        component: UpgradeComponent },
-    { path: '',               redirectTo: 'dashboard', pathMatch: 'full' }
+    { path: 'project',        component: UpgradeComponent },
 ];
 
 @NgModule({
   imports: [
     CommonModule,
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {useHash: true}),
+    ProjectsViewModule
   ],
   exports: [
   ],

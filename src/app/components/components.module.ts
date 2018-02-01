@@ -12,14 +12,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     RouterModule,
   ],
   declarations: [
-    FooterComponent,
-    NavbarComponent,
-    SidebarComponent
+
   ],
   exports: [
-    FooterComponent,
-    NavbarComponent,
-    SidebarComponent
   ]
 })
 export class ComponentsModule { }
