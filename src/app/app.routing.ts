@@ -12,7 +12,7 @@ import { MapsComponent } from './maps/maps.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
 
-const routes: Routes =[
+/* const routes: Routes =[
     { path: 'dashboard',      component: DashboardComponent },
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'table-list',     component: TableListComponent },
@@ -22,6 +22,11 @@ const routes: Routes =[
     { path: 'notifications',  component: NotificationsComponent },
     { path: 'upgrade',        component: UpgradeComponent },
     { path: '',               redirectTo: 'dashboard', pathMatch: 'full' }
+]; */
+
+export const routes: Routes = [{
+   path: 'app',   loadChildren: './components/layout/layout.module#LayoutModule'
+ }
 ];
 
 @NgModule({

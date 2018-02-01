@@ -1,3 +1,4 @@
+import { LayoutModule } from './components/layout/layout.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -21,7 +22,6 @@ import { UpgradeComponent } from './upgrade/upgrade.component';
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
     UserProfileComponent,
     TableListComponent,
     TypographyComponent,
@@ -35,7 +35,7 @@ import { UpgradeComponent } from './upgrade/upgrade.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    ComponentsModule,
+    LayoutModule,
 RouterModule,
     AppRoutingModule
   ],

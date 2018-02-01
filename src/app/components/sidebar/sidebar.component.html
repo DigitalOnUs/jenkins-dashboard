@@ -1,5 +1,5 @@
 <div class="logo">
-    <a href="" class="simple-text">
+    <a class="simple-text">
         <div class="logo-img">
             <img src="/assets/img/angular2-logo-red.png"/>
         </div>
@@ -47,6 +47,20 @@
     </ul>
 
     <div class="nav-container">
+       <!-- <ul class="nav" routerLinkActive="active">
+            <li class="">
+                <a [routerLink]="['']">
+                    <i class="material-icons library_books">library_books</i>
+                    <p>Jenkins</p>
+                </a>
+            </li>
+            <li class="">
+                <a [routerLink]="['upgrade']">
+                    <i class="material-icons library_books">library_books</i>
+                    <p>Pipeline Generator</p>
+                </a>
+            </li>
+        </ul>-->
         <ul class="nav">
             <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}}">
                 <a  [routerLink]="[menuItem.path]">
