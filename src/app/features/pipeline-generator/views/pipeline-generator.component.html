@@ -13,17 +13,15 @@
                                 <div class="row">
                                     <div class="input-field col s6">
                                         <div class="input-field col s12">
-                                            <select formControlName="options">
+                                            <select formControlName="options" materialize="material_select" [materializeSelectOptions]="optionsPipeline">
                                                 <option value="" disabled selected>Choose your option</option>
-                                                <option value="1">I.T</option>
-                                                <option value="2">Deploy</option>
-                                                <option value="3">Linter</option>
+                                                <option *ngFor="let option of optionsPipeline" [value]="option.name">{{option.name}}</option>
                                             </select>
                                             <label>Actions: </label>
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                                <button [disabled]="form.invalid" class="btn waves-effect waves-light" type="submit" name="action">Submit
                                     <i class="material-icons right">send</i>
                                 </button>
                             </form>

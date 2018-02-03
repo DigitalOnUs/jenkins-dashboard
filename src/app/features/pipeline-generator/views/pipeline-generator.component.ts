@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 declare const $: any;
 
@@ -7,15 +7,21 @@ declare const $: any;
   selector: "app-pipeline-generator",
   templateUrl: "./pipeline-generator.component.html"
 })
-export class PipelineGeneratorComponent {
+export class PipelineGeneratorComponent implements OnInit {
   form: FormGroup;
+  optionsPipeline: any[];
 
   constructor(fb: FormBuilder) {
-    $(document).ready(function() {
-      $("select").material_select();
-    });
     this.form = fb.group({
-      options: ['', Validators.required]
-  });
+      options: ["", Validators.required]
+    });
+  }
+
+  ngOnInit(): void {
+    this.optionsPipeline = [
+      { name: "one" },
+      { name: "two" },
+      { name: "three" }
+    ];
   }
 }

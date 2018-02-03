@@ -40,7 +40,8 @@ import { UpgradeComponent } from './upgrade/upgrade.component';
 RouterModule,
     AppRoutingModule,
     MaterializeModule,
-    FormsModule
+    FormsModule,
+      MaterializeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
