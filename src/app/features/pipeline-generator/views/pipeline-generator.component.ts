@@ -18,7 +18,7 @@ export class PipelineGeneratorComponent implements OnInit {
       $(".collapsible").collapsible();
     });
     this.form = fb.group({
-      options: ["", Validators.required]
+      name: ["", Validators.required]
     });
   }
 
@@ -52,13 +52,14 @@ export class PipelineGeneratorComponent implements OnInit {
     if (!this.isAlreadyAdded(this.form.value)) {
       this.dataToSentBackend.push(Object.assign({}, this.form.value));
     }
+    console.log(this.dataToSentBackend);
     this.form.reset();
   }
 
   isAlreadyAdded(data: any): boolean {
     let found = false;
     for (let i = 0; i < this.dataToSentBackend.length; i++) {
-      if (this.dataToSentBackend[i].options === data.options) {
+      if (this.dataToSentBackend[i].name === data.name) {
         found = true;
         toast("Action already added", 3000);
         break;
