@@ -5,30 +5,38 @@
                 <option value="" disabled selected>Choose lenguage</option>
                 <option *ngFor="let option of lenguageToSelect" [value]="option.name">{{option.name}}</option>
             </select>
+            <label>Lenguage: </label>
         </div>
     </div>
     <div class="row">
         <div class="input-field col s12">
             <div class="input-field col s12">
                 <select formControlName="name" materialize="material_select" [materializeSelectOptions]="scriptsToSelect">
-                    <option value="" disabled selected>Choose your option</option>
+                    <option value="" disabled selected>Choose actions</option>
                     <option *ngFor="let option of scriptsToSelect" [value]="option.name">{{option.name}}</option>
                 </select>
-                <label>Options: </label>
+                <label>Script: </label>
             </div>
         </div>
     </div>
-    <button (click)="addAction(form.value)" [disabled]="form.invalid" class="btn waves-effect waves-light" type="submit" name="action">Submit
-        <i class="material-icons right">send</i>
+    <button (click)="addAction(form.value)" [disabled]="form.invalid" class="btn btn-info waves-effect waves-teal" name="action">Sasdasd
+        <i class="material-icons right">add</i>
     </button>
     <button (click)="cancelAdding()" class="btn btn-danger waves-effect waves-light" type="submit" name="action">Cancel
-        <i class="material-icons right">send</i>
+        <i class="material-icons right">cancel</i>
     </button>
 </form>
 <div class="row">
-    <div class="col s6" *ngIf="dataToSentBackend">
+    <div class="col s6">
         <div class="row">
-            <p class="flow-text">Task: </p>
+            <div class="row">
+                <p class="flow-text">Task: </p>
+            </div>
+            <div class="row" *ngIf="!dataToSentBackend.length">
+                <div class="card-panel teal lighten-2">
+                    <p>Add some scripts! </p>
+                </div>
+            </div>
         </div>
         <div class="row">
             <ul class="collapsible popout" data-collapsible="accordion">
@@ -46,4 +54,7 @@
             </ul>
         </div>
     </div>
+    <button *ngIf="!dataToSentBackend" class="pull-right btn waves-effect waves-light" type="submit" name="action">Send
+        <i class="material-icons right">send</i>
+    </button>
 </div>

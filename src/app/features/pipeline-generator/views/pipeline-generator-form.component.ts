@@ -21,16 +21,17 @@ export class PipelineGeneratorFormComponent implements OnInit {
             name: "Java"
         }, {
             name: "NodeJs"
-        },
-        {
-            name: "Python"
         }]
-        this.form.valueChanges.subscribe(val => {
-            console.log(`My name is ${val}.`)
+        this.form.get('lenguage').valueChanges.subscribe(val => {
+            switch(val){
+                case 'Java': this.scriptsToSelect = [{name: 'linterJAVA'},{name: 'compileJAVA'},{name: 'deployJAVA'}]
+                break;
+                case 'NodeJs': this.scriptsToSelect = [{name: 'linterNodeJs'},{name: 'compileNodeJs'},{name: 'deployNodeJs'}]
+                break;
+            }
         });
 
         //TODO: each lenguage have diferent options
-        this.scriptsToSelect = [{name: 'linter'},{name: 'compile'},{name: 'deploy'}]
 
         this.dataToSentBackend = [];
     }
@@ -53,8 +54,6 @@ export class PipelineGeneratorFormComponent implements OnInit {
         if (!this.isAlreadyAdded(this.form.value)) {
             this.dataToSentBackend.push(Object.assign({}, this.form.value));
         }
-        console.log(this.dataToSentBackend);
-        this.form.reset();
     }
 
     isAlreadyAdded(data: any): boolean {
