@@ -39,4 +39,8 @@ export class ProjectsViewComponent implements OnInit {
       $(".modal").modal();
     });
   }
+
+  addNewProject(){
+    console.log("adding new project")
+  }
 }
