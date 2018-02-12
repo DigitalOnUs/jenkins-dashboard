@@ -47,19 +47,19 @@
   <div class="modal-content">
   <!--Create project form -->
     <div class="row">
-      <form class="col s12">
+      <form [formGroup]="form" class="col s12">
         <div class="row">
           <div class="input-field col s12">
             <i class="material-icons prefix">account_circle</i>
-            <input id="first_name" type="text" class="validate">
-            <label for="first_name">Project Name</label>
+            <input formControlName="name" id="first_name" type="text" class="validate">
+            <label for="first_name">Project Name *</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
             <i class="material-icons prefix">account_circle</i>
-            <select formControlName="name" materialize="material_select" [materializeSelectOptions]="scriptsToSelect">
-              <option value="" disabled selected>Choose region</option>
+            <select formControlName="region" materialize="material_select" [materializeSelectOptions]="scriptsToSelect">
+              <option value="" disabled selected>Choose region *</option>
               <option *ngFor="let option of regionToNewProjectForm" [value]="option.name">{{option.name}}</option>
             </select>
             <label>Script: </label>
@@ -70,8 +70,8 @@
     <!--Create project form -->
   </div>
   <div class="modal-footer">
-    <a class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-    <a class="modal-action modal-close waves-effect waves-green btn-flat" (click)="addNewProject()">Create</a>
+    <button class="modal-action modal-close waves-effect waves-green btn-flat" (click)="form.reset()">Cancel</button>
+    <button [disabled]="form.invalid" class="modal-action modal-close waves-effect waves-green btn-flat" (click)="addNewProject()">Create</button>
   </div>
 </div>
 
