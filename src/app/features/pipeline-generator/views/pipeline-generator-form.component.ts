@@ -41,8 +41,9 @@ export class PipelineGeneratorFormComponent implements OnInit {
             $(".collapsible").collapsible();
           });
         this.form = fb.group({
+            name: ['', Validators.required],
             lenguage: ["", Validators.required],
-            name: ["", Validators.required]
+            frameworkOptions: [""]
         });
     }
 

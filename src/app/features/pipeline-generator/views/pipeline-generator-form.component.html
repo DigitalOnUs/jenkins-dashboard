@@ -1,4 +1,10 @@
 <form [formGroup]="form" class="col s6">
+        <div class="row">
+                <div class="input-field col s12">
+                  <input placeholder="Name" formControlName="name" id="name" type="text" class="validate">
+                  <label for="name">Name</label>
+                </div>
+        </div>
     <div class="row">
         <div class="input-field col s12">
             <select formControlName="lenguage" materialize="material_select" [materializeSelectOptions]="lenguageToSelect">
@@ -10,13 +16,11 @@
     </div>
     <div class="row">
         <div class="input-field col s12">
-            <div class="input-field col s12">
-                <select formControlName="name" materialize="material_select" [materializeSelectOptions]="scriptsToSelect">
+                <select formControlName="frameworkOptions" materialize="material_select" [materializeSelectOptions]="scriptsToSelect">
                     <option value="" disabled selected>Choose actions</option>
                     <option *ngFor="let option of scriptsToSelect" [value]="option.name">{{option.name}}</option>
                 </select>
                 <label>Script: </label>
-            </div>
         </div>
     </div>
     <button (click)="addAction(form.value)" [disabled]="form.invalid" class="btn btn-info waves-effect waves-teal" name="action">New script
