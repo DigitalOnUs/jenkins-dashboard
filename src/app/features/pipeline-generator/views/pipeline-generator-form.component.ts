@@ -1,4 +1,4 @@
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Component, Output, EventEmitter } from '@angular/core';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { toast } from "angular2-materialize";
@@ -14,6 +14,7 @@ export class PipelineGeneratorFormComponent implements OnInit {
     lenguageToSelect: any[];
     dataToSentBackend: any[];
     scriptsToSelect: any[];
+    frameworkOptions: any[] = [];
 
     ngOnInit(): void {
         //TODO: Change this for a catalog sent for backend
@@ -36,15 +37,44 @@ export class PipelineGeneratorFormComponent implements OnInit {
         this.dataToSentBackend = [];
     }
 
-    constructor(fb: FormBuilder) {
+    constructor(private fb: FormBuilder) {
         $(document).ready(function () {
             $(".collapsible").collapsible();
           });
         this.form = fb.group({
             name: ['', Validators.required],
             lenguage: ["", Validators.required],
-            frameworkOptions: [""]
+            options: fb.array([ this.initItemRows() ])
         });
+    }
+
+    initItemRows() {
+        return this.fb.group({
+            // list all your form controls here, which belongs to your form array
+            framework: ['']
+        });
+    }
+
+    createItem(): FormGroup {
+        return this.fb.group({
+          name: '',
+          description: '',
+          price: ''
+        });
+      }
+
+      addNewRow() {
+        // control refers to your formarray
+        const control = <FormArray>this.form.controls['options'];
+        // add new formgroup
+        control.push(this.initItemRows());
+    }
+
+    deleteRow(index: number) {
+        // control refers to your formarray
+        const control = <FormArray>this.form.controls['options'];
+        // remove the chosen row
+        control.removeAt(index);
     }
 
     cancelAdding() {
