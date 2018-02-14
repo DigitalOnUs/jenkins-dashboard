@@ -1,3 +1,4 @@
+import { StepsService } from './../../../services/steps.service';
 import { NgModule } from "@angular/core";
 import { PipelineGeneratorComponent } from "./pipeline-generator.component";
 import { ReactiveFormsModule } from "@angular/forms";
@@ -8,6 +9,7 @@ import { PipelineGeneratorFormComponent } from "./pipeline-generator-form.compon
 @NgModule({
   imports: [ReactiveFormsModule, CommonModule, MaterializeModule],
   declarations: [PipelineGeneratorComponent, PipelineGeneratorFormComponent],
-  exports: [PipelineGeneratorComponent , PipelineGeneratorFormComponent]
+  exports: [PipelineGeneratorComponent , PipelineGeneratorFormComponent],
+  providers: [StepsService]
 })
 export class PipelineGeneratorModule {}

@@ -1,3 +1,4 @@
+import { StepsService } from './../../../services/steps.service';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Component, Output, EventEmitter } from '@angular/core';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
@@ -11,6 +12,7 @@ declare const $: any;
 export class PipelineGeneratorFormComponent implements OnInit {
     form: FormGroup;
     @Output() cancelAddingEvent = new EventEmitter();
+    @Output() addNewOption = new EventEmitter();
     lenguageToSelect: any[];
     dataToSentBackend: any[];
     scriptsToSelect: any[];
@@ -24,11 +26,11 @@ export class PipelineGeneratorFormComponent implements OnInit {
             name: "NodeJs"
         }]
         this.form.get('lenguage').valueChanges.subscribe(val => {
-            switch(val){
-                case 'Java': this.scriptsToSelect = [{name: 'linterJAVA'},{name: 'compileJAVA'},{name: 'deployJAVA'}]
-                break;
-                case 'NodeJs': this.scriptsToSelect = [{name: 'linterNodeJs'},{name: 'compileNodeJs'},{name: 'deployNodeJs'}]
-                break;
+            switch (val) {
+                case 'Java': this.scriptsToSelect = [{ name: 'linterJAVA' }, { name: 'compileJAVA' }, { name: 'deployJAVA' }]
+                    break;
+                case 'NodeJs': this.scriptsToSelect = [{ name: 'linterNodeJs' }, { name: 'compileNodeJs' }, { name: 'deployNodeJs' }]
+                    break;
             }
         });
 
@@ -38,13 +40,10 @@ export class PipelineGeneratorFormComponent implements OnInit {
     }
 
     constructor(private fb: FormBuilder) {
-        $(document).ready(function () {
-            $(".collapsible").collapsible();
-          });
         this.form = fb.group({
             name: ['', Validators.required],
             lenguage: ["", Validators.required],
-            options: fb.array([ this.initItemRows() ])
+            options: fb.array([this.initItemRows()])
         });
     }
 
@@ -57,13 +56,13 @@ export class PipelineGeneratorFormComponent implements OnInit {
 
     createItem(): FormGroup {
         return this.fb.group({
-          name: '',
-          description: '',
-          price: ''
+            name: '',
+            description: '',
+            price: ''
         });
-      }
+    }
 
-      addNewRow() {
+    addNewRow() {
         // control refers to your formarray
         const control = <FormArray>this.form.controls['options'];
         // add new formgroup
@@ -82,11 +81,11 @@ export class PipelineGeneratorFormComponent implements OnInit {
     }
 
     addAction() {
-        if (!this.isAlreadyAdded(this.form.value)) {
-            this.dataToSentBackend.push(Object.assign({}, this.form.value));
-        }
+        this.addNewOption.emit(this.form.value);
+        this.cancelAdding();
     }
 
+    // TODO: Check if this code is necessary
     isAlreadyAdded(data: any): boolean {
         let found = false;
         for (let i = 0; i < this.dataToSentBackend.length; i++) {
