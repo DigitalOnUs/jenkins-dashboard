@@ -19,13 +19,13 @@
             <div formArrayName="options">
                 <div *ngFor="let itemrow of form.controls.options.controls; let i=index" [formGroupName]="i">
                     <div class="form-group">
-                        <input formControlName="framework" placeholder="Option #{{i + 1}}" class="form-control">
+                        <input formControlName="framework" placeholder="Step #{{i + 1}}" class="form-control">
                     </div>
                     <button *ngIf="form.controls.options.controls.length > 1" (click)="deleteRow(i)" class="btn btn-danger">Delete Button</button>
 
                 </div>
             </div>
-            <button type="button" (click)="addNewRow()" class="btn btn-primary">Add new Row</button>
+            <button type="button" (click)="addNewRow()" class="btn btn-primary">Add new step</button>
         </div>
     </div>
     <button (click)="addAction(form.value)" [disabled]="form.invalid" class="btn btn-info waves-effect waves-teal" name="action">New script

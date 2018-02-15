@@ -12,7 +12,8 @@ export class StepsService {
     }
 
     getListAllSteps(id:number){
-        return this.http.get(this.url + '/project/' + id).map((steps:Response) => steps.json());
+        //TODO: Change to projectId
+        return this.http.get(this.url + '/steps/' + id).map((steps:Response) => steps.json());
     }
 
     postAddNewOption(body: any, idProject: number){
