@@ -16,20 +16,17 @@
                             </div>
                         </div>
                         <div class="row">
-                            <form [formGroup]="form">
-                                <div class="input-field col s6" [hidden]="!isAddingOption">
-                                    <select formControlName="language" materialize="material_select" [materializeSelectOptions]="lenguageToSelect">
-                                        <option value="" disabled selected>Choose lenguage</option>
-                                        <option *ngFor="let language of languages" [value]="language.name">{{language.name}}</option>
-                                    </select>
-                                    <label>Language: </label>
-                                </div>
-                            </form>
-
+                            <div class="input-field col s6" [hidden]="!isAddingOption">
+                                <select [(ngModel)]="language" materialize="material_select" [materializeSelectOptions]="lenguageToSelect">
+                                    <option value="" disabled selected>Choose lenguage</option>
+                                    <option *ngFor="let language of languages" [value]="language.name">{{language.name}}</option>
+                                </select>
+                                <label>Language: </label>
+                            </div>
                         </div>
                         <div class="row">
-                            <div class="col s12" *ngIf="form.controls.language.value == 'Fiori'">
-                                <app-fiori-form></app-fiori-form>
+                            <div class="col s12" *ngIf="language == 'Fiori'">
+                                <app-fiori-form (fioriOptions)="saveStep($event)" (cancelAdding)="funCancelAdding()"></app-fiori-form>
                             </div>
                             <div class="row" [hidden]="isAddingOption">
                                 <div class="col s12">

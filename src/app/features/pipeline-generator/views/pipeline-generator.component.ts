@@ -10,7 +10,7 @@ declare const $: any;
   templateUrl: "./pipeline-generator.component.html"
 })
 export class PipelineGeneratorComponent implements OnInit {
-  form: FormGroup;
+  language: any;
   isAddingOption: boolean;
   idProject: number;
   listAllSteps: any[];
@@ -20,12 +20,8 @@ export class PipelineGeneratorComponent implements OnInit {
   showFioriForm: boolean;
 
   constructor(private stepsService: StepsService,
-    private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder) {
+    private activatedRoute: ActivatedRoute) {
     this.activatedRoute.parent.parent.params.subscribe(params => this.idProject = params.id)
-    this.form = fb.group({
-      language: ["", Validators.required]
-  });
   this.showFioriForm = false;
   }
   ngOnInit(): void {
@@ -49,14 +45,12 @@ export class PipelineGeneratorComponent implements OnInit {
   }
 
   saveStep(step: any) {
-    this.stepsService.postAddNewOption(step, this.idProject).subscribe(response => { console.log(response.text()) }
-      , error => {
-        console.log(error);
-      })
+    console.log(step);
   }
-  cancelAdding() {
+  funCancelAdding() {
     this.selectedStep = null;
     this.isAddingOption = false;
+    this.language = null;
   }
   editStepEvent(step: any){
   this.selectedStep = step; 

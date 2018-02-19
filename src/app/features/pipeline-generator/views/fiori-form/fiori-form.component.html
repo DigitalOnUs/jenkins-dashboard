@@ -1,8 +1,57 @@
-<form action="" [formGroup]="form">
+<form [formGroup]="form">
     <div class="row">
         <div class="input-field col s6">
-            <input placeholder="Name" formControlName="name" id="name" type="text" class="validate">
+            <input formControlName="name" id="name" type="text" class="validate">
             <label for="name">Name</label>
         </div>
     </div>
+    <div formGroupName="options">
+        <div class="row">
+            <div class="input-field col s6">
+                <input formControlName="type" id="name" type="text" class="validate">
+                <label for="name">Type</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input formControlName="description" id="name" type="text" class="validate">
+                <label for="name">Description</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input formControlName="url" id="name" type="text" class="validate">
+                <label for="name">URL</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input formControlName="proxy_type" id="name" type="text" class="validate">
+                <label for="name">Proxy Type</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input formControlName="authentication" id="name" type="text" class="validate">
+                <label for="name">Authentication</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <div class="col s3">
+                    <button [disabled]="form.invalid" (click)="save()" class="btn btn-primary">Submit
+                        <i class="material-icons right">add</i>
+                    </button>
+                </div>
+                <div class="col s3">
+                    <button class="btn btn-danger" (click)="funCancelAdding()">Cancel
+                        <i class="material-icons right">cancel</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <pre>
+        {{form.value | json}}
+    </pre>
 </form>
