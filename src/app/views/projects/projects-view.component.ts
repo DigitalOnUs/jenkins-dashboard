@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 declare const $: any;
-import swal from 'sweetalert';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
