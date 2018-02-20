@@ -22,13 +22,13 @@ export class PipelineGeneratorComponent implements OnInit {
   constructor(private stepsService: StepsService,
     private activatedRoute: ActivatedRoute) {
     this.activatedRoute.parent.parent.params.subscribe(params => this.idProject = params.id)
-  this.showFioriForm = false;
+    this.showFioriForm = false;
   }
   ngOnInit(): void {
     $(document).ready(function () {
       $(".collapsible").collapsible();
     });
-    $(document).ready(function() {
+    $(document).ready(function () {
       $('select').material_select();
     });
 
@@ -36,23 +36,34 @@ export class PipelineGeneratorComponent implements OnInit {
       id: 1,
       'name': 'Fiori'
     }]
-    
-
-    this.stepsService.getListAllSteps(this.idProject).subscribe(response => {
-      this.listAllSteps = response.steps;
-      console.log(this.listAllSteps);
-    });
+    //TODO: Delete this
+    this.listAllSteps = [];
   }
 
   saveStep(step: any) {
-    console.log(step);
+    if (this.selectedStep) {
+      let obj = this.listAllSteps.indexOf(this.selectedStep);
+      this.listAllSteps[obj] = step;
+      this.selectedStep = null
+    } else {
+      this.listAllSteps.push(step);
+    }
+    this.isAddingOption = false;
+    this.language = null;
   }
   funCancelAdding() {
     this.selectedStep = null;
     this.isAddingOption = false;
     this.language = null;
   }
-  editStepEvent(step: any){
-  this.selectedStep = step; 
+  editStepEvent(step: any) {
+    //TODO: Delete this
+    this.language = 'Fiori';
+    this.selectedStep = step;
+  }
+
+  deleteStep(step: any) {
+    let i = this.listAllSteps.indexOf(step);
+    this.listAllSteps.splice(i);
   }
 }
