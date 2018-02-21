@@ -17,7 +17,7 @@ export class ProjectsViewComponent implements OnInit {
     this.id = 2;
     //TODO: Catalog from backend
     this.regionToNewProjectForm = [
-      { name: 'USA' },
+      { name: 'United States' },
       { name: 'Mexico' },
       { name: 'India' }
     ];
@@ -25,15 +25,9 @@ export class ProjectsViewComponent implements OnInit {
     this.projects = [
       {
         id: 1,
-        name: 'Project 1',
-        description:
-          'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium culpa doloremque eligendi et hic id, obcaecati quam sit? Accusamus consectetur cum eaque eos excepturi explicabo nesciunt pariatur quasi quisquam sint?'
-      },
-      {
-        id: 2,
-        name: 'Project 2',
-        description:
-          'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium culpa doloremque eligendi et hic id, obcaecati quam sit? Accusamus consectetur cum eaque eos excepturi explicabo nesciunt pariatur quasi quisquam sint?'
+        name: 'Fiori Project',
+        url:
+          'travis-ci-a9689'
       }
     ];
   }
@@ -45,6 +39,7 @@ export class ProjectsViewComponent implements OnInit {
     });
     this.form = fb.group({
       name: ['', Validators.required],
+      url: ['', Validators.required],
       region: ['', Validators.required]
     });
   }

@@ -66,4 +66,13 @@ export class PipelineGeneratorComponent implements OnInit {
     let i = this.listAllSteps.indexOf(step);
     this.listAllSteps.splice(i);
   }
+  submitPipeline(){
+    //TODO: Delete FIORI HARCODE
+    let obj = Object.assign({},
+      {'language': 'Fiori',
+        'steps': this.listAllSteps})
+        toast('Success', 3000, 'rounded')
+        console.log("Structure send to back -->")
+    console.log(obj);
+  }
 }

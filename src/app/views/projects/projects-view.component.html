@@ -1,14 +1,15 @@
 <div class="row">
   <nav class="nav-extended" style="background-color: #0086c3">
     <div class="nav-wrapper">
-      <img src="https://avatars1.githubusercontent.com/u/25673011?s=200&v=4" style="width: 35px">
-      <a href="#!" class="brand-logo" style="color: #D4D4D4;">Jenkins project</a>
+        &nbsp;&nbsp;
+      <img src="http://digitalonus.com/img/logo.png" style="width: 35px">
+      <a href="#!" class="brand-logo" style="color: #D4D4D4;">&nbsp;&nbsp;Digital On Us</a>
       <ul class="right hide-on-med-and-down">
         <li><a>Preferences</a></li>
       </ul>
     </div>
     <div class="nav-content" style="background-color: #0086c3">
-      <span class="nav-title">Projects</span>
+      <span class="nav-title">&nbsp;&nbsp;Projects</span>
       <a class="btn-floating btn-large pulse halfway-fab waves-effect waves-light teal modal-trigger" href="#modal1">
         <i class="material-icons">add</i>
       </a>
@@ -26,7 +27,7 @@
             <div class="card-content white-text">
               <span class="card-title">{{project.name}}</span>
               <p >
-                {{project.description}}
+                {{project.url}}
               </p>
             </div>
             <div class="card-action">
@@ -53,6 +54,13 @@
             <i class="material-icons prefix">account_circle</i>
             <input formControlName="name" id="first_name" type="text" class="validate">
             <label for="first_name">Project Name *</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">account_circle</i>
+            <input formControlName="url" id="first_name" type="text" class="validate">
+            <label for="first_name">URL *</label>
           </div>
         </div>
         <div class="row">

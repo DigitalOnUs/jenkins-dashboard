@@ -32,13 +32,16 @@ export class FioriFormComponent implements OnInit {
 
     ngOnInit() {
         this.nameOfScript = [{
-            'name': 'CI_DEPLOY_ACCOUNT'
+            'id': 'CI_DEPLOY_ACCOUNT',
+            'name': 'CI Account'
         },
         {
-            'name': 'TEST_DEPLOY_ACCOUNT'
+            'id': 'TEST_DEPLOY_ACCOUNT',
+            'name': 'Test Account'
         },
         {
-            'name': 'PROD_DEPLOY_ACCOUNT'
+            'id': 'PROD_DEPLOY_ACCOUNT',
+            'name': 'Production Account'
         }];
 
         // tslint:disable-next-line:curly
