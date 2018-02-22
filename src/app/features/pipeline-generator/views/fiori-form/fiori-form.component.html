@@ -1,0 +1,20 @@
+<form [formGroup]="form">
+    <div class="row">
+        <div class="input-field col s6">
+                        <select formControlName="name" materialize="material_select" [materializeSelectOptions]="nameOfScript">
+                            <option value="" disabled selected>Choose name</option>
+                            <option *ngFor="let option of nameOfScript" [value]="option.name">{{option.name}}</option>
+                        </select>
+                        <label>Name: </label>
+        
+        </div>
+        <div class="input-field col s6">
+                <input formControlName="value" id="value" type="text" class="validate">
+                <label for="value">Value</label>
+            </div>
+    </div>
+    <div class="row">
+        <button (click)="save()" [disabled]="form.invalid" class="btn btn-info"><i class="material-icons right">add</i>Add</button>
+        <button (click)="funCancelAdding()" class="btn btn-danger"><i class="material-icons right">cancel</i>Cancel</button>
+    </div>
+</form>

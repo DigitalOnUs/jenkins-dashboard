@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { MaterializeModule } from 'angular2-materialize';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
@@ -37,7 +38,10 @@ import { UpgradeComponent } from './upgrade/upgrade.component';
     HttpModule,
     ComponentsModule,
 RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MaterializeModule,
+    FormsModule,
+      MaterializeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
