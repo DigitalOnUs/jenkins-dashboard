@@ -18,6 +18,11 @@ export const ROUTES: Routes = [
         path: 'pipeline',
         loadChildren:
           '../../features/pipeline-generator/pipeline-generator.routing#PipelineGeneratorRouting'
+      },
+      {
+        path: 'jenkins',
+        loadChildren:
+        '../../features/jenkins-status/jenkins-status-view.routing#JenkinsStatusRouting'
       }
     ]
   }
