@@ -4,11 +4,75 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header" data-background-color="blue">
-                        <h4 class="title">Material Dashboard Heading</h4>
-                        <p class="category">Created by Richard Hern</p>
+                        <h4 class="title">Jenkins Status</h4>
+                        
                     </div>
                     <div class="card-content">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti cupiditate ullam quidem numquam dignissimos aperiam! Eligendi ipsam excepturi enim amet, corporis saepe, accusantium minus quibusdam, ad hic neque? Dolorum, dignissimos!
+
+
+
+                            <div class="row" *ngIf="!isGettingStatus && status == 'Success'">
+                                    <div class="center-align ">
+                                            <i class="material-icons" style="font-size: 150px">check_circle</i> 
+                                    </div>
+                                    <div class="center-align">
+                                            <div class="alert alert-success" role="alert">
+                                                    <samp>{{message}}</samp>
+                                                  </div>
+                                            
+                                    </div>
+                                    
+                                  </div>
+                        
+
+                        <div class="row" *ngIf="!isGettingStatus && status == 'Warning'">
+                            <div class="center-align ">
+                                    <i class="material-icons" style="font-size: 150px">warning</i> 
+                            </div>
+                            <div class="center-align">
+                                    <div class="alert alert-warning" role="alert">
+                                            <samp>{{message}}</samp>
+                                          </div>
+                                    
+                            </div>
+                            
+                          </div>
+
+
+
+                              <div class="row" *ngIf="!isGettingStatus && status == 'Danger'">
+                                    <div class="center-align ">
+                                            <i class="material-icons" style="font-size: 150px">error</i> 
+                                    </div>
+                                    <div class="center-align">
+                                            <div class="alert alert-danger" role="alert">
+                                                    <samp>{{message}}</samp>
+                                                  </div>
+                                            
+                                    </div>
+                                    
+                                  </div>
+
+
+                                  <div class="row" *ngIf="isGettingStatus">
+                                      <div class="center-align">
+                                            <div class="preloader-wrapper big active">
+                                                    <div class="spinner-layer spinner-blue-only">
+                                                      <div class="circle-clipper left">
+                                                        <div class="circle"></div>
+                                                      </div><div class="gap-patch">
+                                                        <div class="circle"></div>
+                                                      </div><div class="circle-clipper right">
+                                                        <div class="circle"></div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                      </div>
+                                  </div>
+                                  
+
+
+
                     </div>
                 </div>
             </div>
