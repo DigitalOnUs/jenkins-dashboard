@@ -1,5 +1,6 @@
 import { JenkinStatusService } from './../../../services/jenkin-status.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { toast } from "angular2-materialize";
 
 @Component({
     selector: 'app-jenkins-status',
@@ -17,29 +18,30 @@ export class JenkinsStatusComponent implements OnInit, OnDestroy {
 
     ngOnInit() { 
         /**
-         * Make an Http every 
+         * Make an Http every second
          */
+        this.getStatus();
         this.interval = setInterval(() => {
             this.getStatus();
-        }, 1000);
+        }, 120000);
     }
 
     ngOnDestroy() {
         /**
-         * When this view is destroyed we clear every http call
+         * When this view is destroyed it clear every http called
          */
         if (this.interval) {
             clearInterval(this.interval);
         }
        }
 
-    getStatus(){
+    getStatus() {
         this.isGettingStatus = true;
         this.jenkinStatusService.getJenkinStatus().subscribe((response) => {
             this.status = response.status;
             this.message = response.message;
             this.isGettingStatus = false;
-            console.log(this.status);
+            toast('Jenkin Status Updated', 3000, 'rounded');
         }, (err) => {
             this.isGettingStatus = false;
             console.error(err);
