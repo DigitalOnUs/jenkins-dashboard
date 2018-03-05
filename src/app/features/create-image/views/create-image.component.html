@@ -4,32 +4,83 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header" data-background-color="blue">
-                        <h4 class="title">Material Dashboard Heading</h4>
-                        <p class="category">Created by Richard Hern</p>
+                        <h4 class="title">Image Dashboard</h4>
                     </div>
                     <div class="card-content">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="row">
-                                    <div class="center-align">
-                                        <div class="col-md-6">
-                                            <span class="flow-text">I am Flow Text</span>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <!-- Switch -->
-                                            <div class="switch">
-                                                <label>
-                                                    Off
-                                                    <input type="checkbox">
-                                                    <span class="lever"></span>
-                                                    On
-                                                </label>
+                                <form [formGroup]="form">
+                                    <div class="row">
+                                        <div class="center-align">
+                                            <div class="row">
+                                                <!-- Switch -->
+                                                <div class="switch">
+                                                    <label> JENKINS </label>
+                                                    <label>
+                                                        <input formControlName="jenkins" type="checkbox">
+                                                        <span class="lever"></span>
+                                                    </label>
+                                                </div>
+                                                <!-- Switch -->
                                             </div>
-                                            <!-- Switch -->
+                                            <hr>
+                                            <div class="row">
+                                                <!-- Switch -->
+                                                <div class="switch">
+                                                    <label> AZURE </label>
+                                                    <label>
+                                                        <input formControlName="azure" type="checkbox">
+                                                        <span class="lever"></span>
+                                                    </label>
+                                                </div>
+                                                <!-- Switch -->
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <!-- Switch -->
+                                                <div class="switch">
+                                                    <label> SLAVE</label>
+                                                    <label>
+                                                        <input formControlName="slave" type="checkbox">
+                                                        <span class="lever"></span>
+                                                    </label>
+                                                </div>
+                                                <!-- Switch -->
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <!-- Switch -->
+                                                <div class="switch">
+                                                    <label> GARRIT </label>
+                                                    <label>
+                                                        <input formControlName="garrit" type="checkbox">
+                                                        <span class="lever"></span>
+                                                    </label>
+                                                </div>
+                                                <!-- Switch -->
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <!-- Switch -->
+                                                <div class="switch">
+                                                    <label> NEXUS </label>
+                                                    <label>
+                                                        <input formControlName="nexus" type="checkbox">
+                                                        <span class="lever"></span>
+                                                    </label>
+                                                </div>
+                                                <!-- Switch -->
+                                            </div>
+                                            <hr>
                                         </div>
                                     </div>
-                                </div>
+                                    
+                                </form>
                             </div>
+                            <button (click)="sendToBack()" class="btn waves-effect waves-light pull-right" type="submit" name="action">Submit
+                                    <i class="material-icons right">send</i>
+                                  </button>
+                                        
                         </div>
                     </div>
                 </div>
