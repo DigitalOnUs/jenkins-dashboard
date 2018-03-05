@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { toast } from "angular2-materialize";
+import { toast } from 'angular2-materialize';
 declare const $: any;
 @Component({
     selector: 'app-create-image',
@@ -10,13 +10,13 @@ declare const $: any;
 export class CreateImageComponent implements OnInit {
     form: FormGroup;
 
-    constructor(private fb: FormBuilder) { 
+    constructor(private fb: FormBuilder) {
         this.form = fb.group({
-            jenkins: ['', Validators.required],
-            azure: ['', Validators.required],
-            slave: ['', Validators.required],
-            garrit: ['', Validators.required],
-            nexus: ['', Validators.required]
+            jenkins: [false, Validators.required],
+            azure: [false, Validators.required],
+            slave: [false, Validators.required],
+            garrit: [false, Validators.required],
+            nexus: [false, Validators.required]
         });
     }
 
@@ -24,7 +24,6 @@ export class CreateImageComponent implements OnInit {
         $(document).ready(function(){
             $('ul.tabs').tabs();
           });
-                
     }
 
     sendToBack(){
