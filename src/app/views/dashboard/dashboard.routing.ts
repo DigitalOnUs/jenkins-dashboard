@@ -18,6 +18,11 @@ export const ROUTES: Routes = [
         path: 'pipeline',
         loadChildren:
           '../../features/pipeline-generator/pipeline-generator.routing#PipelineGeneratorRouting'
+      },
+      {
+        path: 'image',
+        loadChildren:
+          '../../features/create-image/create-image.routing#CreateImageRouting'
       }
     ]
   }
