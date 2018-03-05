@@ -7,7 +7,7 @@
                         <h4 class="title">Jenkins Status</h4>
                     </div>
                     <div class="card-content">
-                        <div class="row" *ngIf="!isGettingStatus && status == 'Success'">
+                        <div class="row" *ngIf="status == 'Success'">
                             <div class="center-align ">
                                 <i class="material-icons" style="font-size: 150px">check_circle</i>
                             </div>
@@ -17,7 +17,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row" *ngIf="!isGettingStatus && status == 'Warning'">
+                        <div class="row" *ngIf="status == 'Warning'">
                             <div class="center-align ">
                                 <i class="material-icons" style="font-size: 150px">warning</i>
                             </div>
@@ -27,7 +27,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row" *ngIf="!isGettingStatus && status == 'Danger'">
+                        <div class="row" *ngIf="status == 'Danger'">
                             <div class="center-align ">
                                 <i class="material-icons" style="font-size: 150px">error</i>
                             </div>
@@ -37,20 +37,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row" *ngIf="isGettingStatus">
+                        <div class="row" *ngIf="status == 'Danger'">
+                            <div class="center-align ">
+                                <i class="material-icons" style="font-size: 150px">watch_later</i>
+                            </div>
                             <div class="center-align">
-                                <div class="preloader-wrapper big active">
-                                    <div class="spinner-layer spinner-blue-only">
-                                        <div class="circle-clipper left">
-                                            <div class="circle"></div>
-                                        </div>
-                                        <div class="gap-patch">
-                                            <div class="circle"></div>
-                                        </div>
-                                        <div class="circle-clipper right">
-                                            <div class="circle"></div>
-                                        </div>
-                                    </div>
+                                <div class="alert alert-primary" role="alert">
+                                    <samp>{{message}}</samp>
                                 </div>
                             </div>
                         </div>

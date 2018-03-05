@@ -23,7 +23,7 @@ export class JenkinsStatusComponent implements OnInit, OnDestroy {
         this.getStatus();
         this.interval = setInterval(() => {
             this.getStatus();
-        }, 120000);
+        }, 1200);
     }
 
     ngOnDestroy() {
