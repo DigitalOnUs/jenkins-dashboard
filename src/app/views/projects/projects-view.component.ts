@@ -10,18 +10,18 @@ export class ProjectsViewComponent implements OnInit {
   regionToNewProjectForm: any[];
   projects: any[];
   form: FormGroup;
-  //TODO: this id would get it from backed
+  // TODO: this id would get it from backed
   id: number ;
 
   ngOnInit(): void {
     this.id = 2;
-    //TODO: Catalog from backend
+    // TODO: Catalog from backend
     this.regionToNewProjectForm = [
       { name: 'United States' },
       { name: 'Mexico' },
       { name: 'India' }
     ];
-    //TODO: Get request from backend
+    // TODO: Get request from backend
     this.projects = [
       {
         id: 1,
