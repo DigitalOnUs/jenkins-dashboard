@@ -4,39 +4,32 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header" data-background-color="blue">
-                        <h4 class="title">Material Dashboard Heading</h4>
-                        <p class="category">Created by Richard Hern</p>
+                        <h4 class="title">Create Connection</h4>
                     </div>
                     <div class="card-content">
                         <div class="row">
-                            <form class="col s12">
+                            <form class="col s12" [formGroup]="form">
                                 <div class="row">
                                     <div class="input-field col s6">
-                                        <input  id="first_name" type="text" class="validate">
-                                        <label for="first_name">First Name</label>
+                                        <select formControlName="provider" materialize="material_select" [materializeSelectOptions]="providers">
+                                            <option value="" disabled selected>Choose provider</option>
+                                            <option *ngFor="let provider of providers" [value]="provider.name">{{provider.name}}</option>
+                                        </select>
+                                        <label>Name: </label>
                                     </div>
                                     <div class="input-field col s6">
-                                        <input id="last_name" type="text" class="validate">
-                                        <label for="last_name">Last Name</label>
+                                        <input formControlName="accessKey" id="last_name" type="text" class="validate">
+                                        <label for="last_name">Access Key</label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <input disabled  id="disabled" type="text" class="validate">
-                                        <label for="disabled">Disabled</label>
+                                        <input formControlName="secret" id="disabled" type="text" class="validate">
+                                        <label for="disabled">Secret</label>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="input-field col s12">
-                                        <input id="password" type="password" class="validate">
-                                        <label for="password">Password</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <input id="email" type="email" class="validate">
-                                        <label for="email">Email</label>
-                                    </div>
+                                    <button (click)="save()" [disabled]="form.invalid" class="btn btn-success"><i class="material-icons right">done</i>Save</button>
                                 </div>
                             </form>
                         </div>
