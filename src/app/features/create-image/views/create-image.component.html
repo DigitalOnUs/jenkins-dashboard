@@ -17,32 +17,35 @@
                                                 <div class="switch">
                                                     <label> JENKINS </label>
                                                     <label>
-                                                        <input formControlName="jenkins" type="checkbox">
+                                                        <input (change)="sendToBack('jenkins')" formControlName="jenkins" type="checkbox">
                                                         <span class="lever"></span>
+                                                        <i *ngIf="form.controls.jenkins.value == true" class="material-icons right" style="font-size: 15px">done</i>
                                                     </label>
                                                 </div>
                                                 <!-- Switch -->
                                             </div>
                                             <hr>
-                                            <div class="row">
+                                            <div hidden class="row">
                                                 <!-- Switch -->
                                                 <div class="switch">
                                                     <label> AZURE </label>
                                                     <label>
-                                                        <input formControlName="azure" type="checkbox">
+                                                        <input (change)="sendToBack('azure')" formControlName="azure" type="checkbox">
                                                         <span class="lever"></span>
+                                                        <i *ngIf="form.controls.azure.value == true" class="material-icons right" style="font-size: 15px">done</i>
                                                     </label>
                                                 </div>
                                                 <!-- Switch -->
                                             </div>
-                                            <hr>
+                                            <hr hidden>
                                             <div class="row">
                                                 <!-- Switch -->
                                                 <div class="switch">
                                                     <label> SLAVE</label>
                                                     <label>
-                                                        <input formControlName="slave" type="checkbox">
+                                                        <input (change)="sendToBack('slave')" formControlName="slave" type="checkbox">
                                                         <span class="lever"></span>
+                                                        <i *ngIf="form.controls.slave.value == true" class="material-icons right" style="font-size: 15px">done</i>
                                                     </label>
                                                 </div>
                                                 <!-- Switch -->
@@ -51,10 +54,11 @@
                                             <div class="row">
                                                 <!-- Switch -->
                                                 <div class="switch">
-                                                    <label> GARRIT </label>
+                                                    <label> GERRIT </label>
                                                     <label>
-                                                        <input formControlName="garrit" type="checkbox">
+                                                        <input (change)="sendToBack('gerrit')" formControlName="gerrit" type="checkbox">
                                                         <span class="lever"></span>
+                                                        <i *ngIf="form.controls.gerrit.value == true" class="material-icons right" style="font-size: 15px">done</i>
                                                     </label>
                                                 </div>
                                                 <!-- Switch -->
@@ -65,8 +69,9 @@
                                                 <div class="switch">
                                                     <label> NEXUS </label>
                                                     <label>
-                                                        <input formControlName="nexus" type="checkbox">
+                                                        <input (change)="sendToBack('nexus')" formControlName="nexus" type="checkbox">
                                                         <span class="lever"></span>
+                                                        <i *ngIf="form.controls.nexus.value == true" class="material-icons right" style="font-size: 15px">done</i>
                                                     </label>
                                                 </div>
                                                 <!-- Switch -->
@@ -74,14 +79,8 @@
                                             <hr>
                                         </div>
                                     </div>
-                                    <pre>
-                                        {{form.value | json}}
-                                    </pre>
                                 </form>
                             </div>
-                            <button (click)="sendToBack()" class="btn waves-effect waves-light pull-right" type="submit" name="action">Submit
-                                    <i class="material-icons right">send</i>
-                                  </button>
                         </div>
                     </div>
                 </div>
