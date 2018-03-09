@@ -23,6 +23,11 @@ export const ROUTES: Routes = [
         path: 'image',
         loadChildren:
           '../../features/create-image/create-image.routing#CreateImageRouting'
+      },
+      {
+        path: 'jenkins',
+        loadChildren:
+        '../../features/jenkins-status/jenkins-status-view.routing#JenkinsStatusRouting'
       }
     ]
   }

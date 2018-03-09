@@ -1,0 +1,55 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="blue">
+                        <h4 class="title">Jenkins Status</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="row" *ngIf="status == 'Success'">
+                            <div class="center-align ">
+                                <i class="material-icons" style="font-size: 150px">check_circle</i>
+                            </div>
+                            <div class="center-align">
+                                <div class="alert alert-success" role="alert">
+                                    <samp>{{message}}</samp>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="status == 'Warning'">
+                            <div class="center-align ">
+                                <i class="material-icons" style="font-size: 150px">warning</i>
+                            </div>
+                            <div class="center-align">
+                                <div class="alert alert-warning" role="alert">
+                                    <samp>{{message}}</samp>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="status == 'Danger'">
+                            <div class="center-align ">
+                                <i class="material-icons" style="font-size: 150px">error</i>
+                            </div>
+                            <div class="center-align">
+                                <div class="alert alert-danger" role="alert">
+                                    <samp>{{message}}</samp>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="status == 'Danger'">
+                            <div class="center-align ">
+                                <i class="material-icons" style="font-size: 150px">watch_later</i>
+                            </div>
+                            <div class="center-align">
+                                <div class="alert alert-primary" role="alert">
+                                    <samp>{{message}}</samp>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
