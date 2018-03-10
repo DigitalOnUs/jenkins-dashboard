@@ -8,16 +8,20 @@ import 'rxjs/add/operator/catch';
 export class StepsService {
     private url;
     constructor(private http: Http) { 
-        this.url = 'http://localhost:3000'
+        this.url = 'http://54.183.152.125:8080'
     }
 
-    getListAllSteps(id:number){
-        //TODO: Change to projectId
+    getListAllSteps(id:string){
         return this.http.get(this.url + '/steps/' + id).map((steps:Response) => steps.json());
     }
 
     postAddNewOption(body: any, idProject: number){
         return this.http.post(this.url + '/project/' + idProject , body);
+    }
+
+    createPipeline(projectId : string, pipeline: any){
+        console.log(pipeline);
+        return this.http.post(this.url + '/pipeline/' + projectId, pipeline);
     }
     
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 declare const $: any;
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ProjectService } from '../../services/project.service';
 
 @Component({
   selector: 'app-projects-view',
@@ -22,17 +23,12 @@ export class ProjectsViewComponent implements OnInit {
       { name: 'India' }
     ];
     //TODO: Get request from backend
-    this.projects = [
-      {
-        id: 1,
-        name: 'Fiori Project',
-        url:
-          'travis-ci-a9689'
-      }
-    ];
+    this.projectService.getAllProject()
+      .subscribe(projects => this.projects = projects);
   }
 
-  constructor(fb: FormBuilder) {
+  constructor(fb: FormBuilder,
+    private projectService: ProjectService) {
     $(document).ready(function() {
       // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
       $('.modal').modal();
@@ -52,7 +48,9 @@ export class ProjectsViewComponent implements OnInit {
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium culpa doloremque eligendi et hic id, obcaecati quam sit? Accusamus consectetur cum eaque eos excepturi explicabo nesciunt pariatur quasi quisquam sint?'
     };
     'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium culpa doloremque eligendi et hic id, obcaecati quam sit? Accusamus consectetur cum eaque eos excepturi explicabo nesciunt pariatur quasi quisquam sint?';
-    this.projects.push(Object.assign({}, this.form.value, object));
+    this.projectService.createProject(Object.assign({}, this.form.value))
+      .subscribe(project => this.projects.push(project));
+    console.log(this.projects);
     this.form.reset();
   }
 }

@@ -3,6 +3,7 @@ import { Component, OnInit, EventEmitter, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { toast } from "angular2-materialize";
 import { ActivatedRoute } from '@angular/router';
+import { PipelineService } from '../../../services/pipeline.service';
 declare const $: any;
 
 @Component({
@@ -12,7 +13,7 @@ declare const $: any;
 export class PipelineGeneratorComponent implements OnInit {
   language: any;
   isAddingOption: boolean;
-  idProject: number;
+  idProject: string;
   listAllSteps: any[];
   @Output() editStep = new EventEmitter();
   selectedStep: any;
@@ -20,6 +21,7 @@ export class PipelineGeneratorComponent implements OnInit {
   showFioriForm: boolean;
 
   constructor(private stepsService: StepsService,
+    private pipelineService : PipelineService,
     private activatedRoute: ActivatedRoute) {
     this.activatedRoute.parent.parent.params.subscribe(params => this.idProject = params.id)
     this.showFioriForm = false;
@@ -35,9 +37,12 @@ export class PipelineGeneratorComponent implements OnInit {
     this.languages = [{
       id: 1,
       'name': 'Fiori'
-    }]
-    //TODO: Delete this
+    }];
     this.listAllSteps = [];
+    this.pipelineService.getPipelineStepsWithId(this.idProject)
+      .subscribe(pipeline => {
+        this.listAllSteps = pipeline.steps;
+      }, error => this.listAllSteps = []);
   }
 
   saveStep(step: any) {
@@ -66,13 +71,18 @@ export class PipelineGeneratorComponent implements OnInit {
     let i = this.listAllSteps.indexOf(step);
     this.listAllSteps.splice(i);
   }
-  submitPipeline(){
-    //TODO: Delete FIORI HARCODE
+  submitPipeline() {
     let obj = Object.assign({},
-      {'language': 'Fiori',
-        'steps': this.listAllSteps})
-        toast('Success', 3000, 'rounded')
-        console.log("Structure send to back -->")
+      {
+        'language': 'Fiori',
+        'steps': this.listAllSteps
+      }
+    );
+    this.stepsService.createPipeline(this.idProject, obj)
+      .subscribe(response => 
+        console.log('Working'), 
+      error => {});
+    //TODO: Delete FIORI HARCODE
     console.log(obj);
   }
 }
