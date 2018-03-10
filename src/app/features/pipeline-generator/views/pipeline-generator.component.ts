@@ -1,14 +1,14 @@
 import { StepsService } from './../../../services/steps.service';
-import { Component, OnInit, EventEmitter, Output } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { toast } from "angular2-materialize";
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { toast } from 'angular2-materialize';
 import { ActivatedRoute } from '@angular/router';
 import { PipelineService } from '../../../services/pipeline.service';
 declare const $: any;
 
 @Component({
-  selector: "app-pipeline-generator",
-  templateUrl: "./pipeline-generator.component.html"
+  selector: 'app-pipeline-generator',
+  templateUrl: './pipeline-generator.component.html'
 })
 export class PipelineGeneratorComponent implements OnInit {
   language: any;
@@ -49,7 +49,7 @@ export class PipelineGeneratorComponent implements OnInit {
     if (this.selectedStep) {
       let obj = this.listAllSteps.indexOf(this.selectedStep);
       this.listAllSteps[obj] = step;
-      this.selectedStep = null
+      this.selectedStep = null;
     } else {
       this.listAllSteps.push(step);
     }
@@ -79,10 +79,9 @@ export class PipelineGeneratorComponent implements OnInit {
       }
     );
     this.stepsService.createPipeline(this.idProject, obj)
-      .subscribe(response => 
-        console.log('Working'), 
+      .subscribe(response =>
+        toast('Success', 3000, 'rounded'), 
       error => {});
-    //TODO: Delete FIORI HARCODE
     console.log(obj);
   }
 }
