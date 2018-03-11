@@ -5,13 +5,14 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class PipelineService {
-    private url;
-    constructor(private http: Http) { 
-        this.url = 'http://54.183.152.125:8080'
-    }
+  private url;
+  constructor(private http: Http) {
+    this.url = 'http://54.183.152.125:8080';
+  }
 
-    getPipelineStepsWithId(id:string){
-        return this.http.get(this.url + '/pipeline/' + id).map((pipeline : Response) => pipeline.json());
-    }
-    
+  getPipelineStepsWithId(id: string) {
+    return this.http
+      .get(this.url + '/pipeline/' + id)
+      .map((pipeline: Response) => pipeline.json());
+  }
 }

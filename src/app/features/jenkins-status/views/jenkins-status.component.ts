@@ -1,6 +1,7 @@
 import { JenkinStatusService } from './../../../services/jenkin-status.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { toast } from "angular2-materialize";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-jenkins-status',
@@ -12,11 +13,14 @@ export class JenkinsStatusComponent implements OnInit, OnDestroy {
     status: any;
     message: any;
     interval: any;
-    constructor(private jenkinStatusService: JenkinStatusService) {
+    idProject: any;
+    constructor(private jenkinStatusService: JenkinStatusService,
+        private activatedRoute: ActivatedRoute) {
         this.isGettingStatus = true;
      }
 
     ngOnInit() { 
+        this.activatedRoute.parent.parent.params.subscribe(params => this.idProject = params.id);
         /**
          * Make an Http every second
          */
@@ -37,7 +41,7 @@ export class JenkinsStatusComponent implements OnInit, OnDestroy {
 
     getStatus() {
         this.isGettingStatus = true;
-        this.jenkinStatusService.getJenkinStatus().subscribe((response) => {
+        this.jenkinStatusService.getJenkinStatus(this.idProject).subscribe((response) => {
             this.status = response.status;
             this.message = response.message;
             this.isGettingStatus = false;

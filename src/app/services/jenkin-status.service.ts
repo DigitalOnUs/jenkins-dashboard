@@ -6,14 +6,14 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class JenkinStatusService {
-    url: string;
+  url: string;
+  
 
-    constructor(private http: Http) {
-        this.url = 'https://private-8601ef-pipelinegenerator.apiary-mock.com/jenkins/proyectId/status';
-     }
+  constructor(private http: Http) {
+      this.url = 'http://54.183.152.125:8080';
+  }
 
-    getJenkinStatus(){
-        return this.http.get(this.url)
-            .map((response: Response) => response.json());
-    }
+  getJenkinStatus(idProject: any) {
+    return this.http.get(this.url + '/jenkins/' + idProject + '/status').map((response: Response) => response.json());
+  }
 }
