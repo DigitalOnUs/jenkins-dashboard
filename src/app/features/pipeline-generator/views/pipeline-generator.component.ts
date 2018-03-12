@@ -81,7 +81,6 @@ export class PipelineGeneratorComponent implements OnInit {
     this.stepsService.createPipeline(this.idProject, obj)
       .subscribe(response =>
         toast('Success', 3000, 'rounded'), 
-      error => {});
-    console.log(obj);
+      error => toast('Success', 3000, 'rounded'));
   }
 }
