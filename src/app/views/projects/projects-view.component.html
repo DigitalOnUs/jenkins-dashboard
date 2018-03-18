@@ -66,7 +66,7 @@
         <div class="row">
           <div class="input-field col s12">
             <i class="material-icons prefix">account_circle</i>
-            <select formControlName="region" materialize="material_select" [materializeSelectOptions]="scriptsToSelect">
+            <select formControlName="region" materialize="material_select" [materializeSelectOptions]="regionToNewProjectForm">
               <option value="" disabled selected>Choose region *</option>
               <option *ngFor="let option of regionToNewProjectForm" [value]="option.name">{{option.name}}</option>
             </select>

@@ -7,7 +7,7 @@
                         <h4 class="title">Jenkins Status</h4>
                     </div>
                     <div class="card-content">
-                        <div class="row" *ngIf="status == 'Success'">
+                        <div class="row" *ngIf="status == 'SUCCESS'">
                             <div class="center-align ">
                                 <i class="material-icons" style="font-size: 150px">check_circle</i>
                             </div>
@@ -17,7 +17,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row" *ngIf="status == 'Warning'">
+                        <div class="row" *ngIf="status == 'WARNING'">
                             <div class="center-align ">
                                 <i class="material-icons" style="font-size: 150px">warning</i>
                             </div>
@@ -27,7 +27,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row" *ngIf="status == 'Danger'">
+                        <div class="row" *ngIf="status == 'FAILURE'">
                             <div class="center-align ">
                                 <i class="material-icons" style="font-size: 150px">error</i>
                             </div>
@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row" *ngIf="status == 'Danger'">
+                        <div class="row" *ngIf="status == 'PENDING'">
                             <div class="center-align ">
                                 <i class="material-icons" style="font-size: 150px">watch_later</i>
                             </div>

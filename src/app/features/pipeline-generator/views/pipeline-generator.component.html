@@ -16,8 +16,8 @@
                         </div>
                         <div class="row">
                             <div class="input-field col s6" [hidden]="!isAddingOption">
-                                <select [(ngModel)]="language" materialize="material_select" [materializeSelectOptions]="lenguageToSelect">
-                                    <option value="" disabled selected>Choose lenguage</option>
+                                <select [(ngModel)]="language" materialize="material_select" [materializeSelectOptions]="languages">
+                                    <option value="" disabled selected>Choose language</option>
                                     <option *ngFor="let language of languages" [value]="language.name">{{language.name}}</option>
                                 </select>
                                 <label>Language: </label>
