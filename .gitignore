@@ -30,3 +30,11 @@ vendor/*-manifest.json
 
 # Docs
 gh-pages
+
+#Backend
+pipeline-generator-backend/pipeline-generator/target
+pipeline-generator-backend/pipeline-generator/yamlFiles
+pipeline-generator-backend/pipeline-generator/.classpath
+pipeline-generator-backend/pipeline-generator/.project
+pipeline-generator-backend/pipeline-generator/.mvn
+pipeline-generator-backend/pipeline-generator/.settings
