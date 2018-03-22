@@ -21,4 +21,11 @@ export class ProjectService {
       .post(this.url + '/project', project)
       .map((project: Response) => project.json());
   }
+
+  getJenkinsHasPipeline(proyectId: any) {
+    return this.http
+      .get('https://private-anon-44de635151-pipelinegenerator.apiary-mock.com/jenkins/' + proyectId + '/pipeline-created')
+      .map((projects: Response) => projects.json());
+  }
+
 }

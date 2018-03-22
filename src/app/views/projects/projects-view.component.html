@@ -31,7 +31,7 @@
               </p>
             </div>
             <div class="card-action">
-              <a [routerLink]="['projects/'+project.id]">Go to project</a>
+              <a (click)="goToDashboard(project.id)" style="cursor: pointer">Go Dashboard</a>
             </div>
           </div>
         </div>
