@@ -7,13 +7,24 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class JenkinStatusService {
   url: string;
-  
 
   constructor(private http: Http) {
-      this.url = 'http://54.183.152.125:8080';
+    this.url = 'http://54.183.152.125:8080';
   }
 
   getJenkinStatus(idProject: any) {
-    return this.http.get(this.url + '/jenkins/' + idProject + '/status').map((response: Response) => response.json());
+    return this.http
+      .get(this.url + '/jenkins/' + idProject + '/status')
+      .map((response: Response) => response.json());
+  }
+
+  getJenkinsLog(projectID: any) {
+    return this.http
+      .get(
+        'https://private-anon-44de635151-pipelinegenerator.apiary-mock.com/jenkins/' +
+          projectID +
+          '/logs'
+      )
+      .map((response: Response) => response.json());
   }
 }
