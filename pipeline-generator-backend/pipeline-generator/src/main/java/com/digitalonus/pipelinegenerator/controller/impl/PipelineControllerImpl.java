@@ -88,7 +88,7 @@ public class PipelineControllerImpl implements PipelineController {
 		finalYaml.add(finalStructure);
 		writer.write(finalYaml);
 		writer.close();
-
+		System.out.println(Paths.get(pathUrl));
 		/*
 		 * Replacing the name of the property value to default
 		 */
