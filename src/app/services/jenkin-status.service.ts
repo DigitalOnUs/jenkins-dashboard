@@ -20,7 +20,7 @@ export class JenkinStatusService {
 
   getJenkinsLog(projectID: any) {
     return this.http
-      .get(this.url + projectID + '/logs')
+      .get(this.url + '/jenkins/' + projectID + '/logs')
       .map((response: Response) => response.json());
   }
 }
