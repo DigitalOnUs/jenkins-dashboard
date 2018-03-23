@@ -1,14 +1,14 @@
-import { Injectable } from "@angular/core";
-import { Http, Response } from "@angular/http";
-import { Observable } from "rxjs/Observable";
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/catch";
+import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class StepsService {
   private url;
   constructor(private http: Http) {
-    this.url = "http://54.183.152.125:8080";
+    this.url = 'http://54.183.152.125:8080';
   }
 
   getListAllSteps(id: string) {
@@ -22,7 +22,6 @@ export class StepsService {
   }
 
   createPipeline(projectId: string, pipeline: any) {
-    console.log(pipeline);
     return this.http.post(this.url + '/pipeline/' + projectId, pipeline);
   }
 
@@ -33,12 +32,10 @@ export class StepsService {
     );
   }
 
-  runJenkinsJob(projectId: string, jobBody) {
+  runJenkinsJob(projectId: string) {
     return this.http.post(
-      'https://private-anon-44de635151-pipelinegenerator.apiary-mock.com/jenkins/' +
-        projectId +
-        '/execute-job',
-      jobBody
+      this.url + '/jenkins/' + projectId + '/execute-job',
+      {}
     );
   }
 }

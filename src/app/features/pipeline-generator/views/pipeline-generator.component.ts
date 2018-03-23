@@ -7,8 +7,8 @@ import { PipelineService } from "../../../services/pipeline.service";
 declare const $: any;
 
 @Component({
-  selector: 'app-pipeline-generator',
-  templateUrl: './pipeline-generator.component.html'
+  selector: "app-pipeline-generator",
+  templateUrl: "./pipeline-generator.component.html"
 })
 export class PipelineGeneratorComponent implements OnInit {
   language: any;
@@ -33,16 +33,16 @@ export class PipelineGeneratorComponent implements OnInit {
   }
   ngOnInit(): void {
     $(document).ready(function() {
-      $('.collapsible').collapsible();
+      $(".collapsible").collapsible();
     });
     $(document).ready(function() {
-      $('select').material_select();
+      $("select").material_select();
     });
 
     this.languages = [
       {
         id: 1,
-        name: 'Fiori'
+        name: "Fiori"
       }
     ];
     this.generateJobButton = false;
@@ -72,7 +72,7 @@ export class PipelineGeneratorComponent implements OnInit {
   }
   editStepEvent(step: any) {
     //TODO: Delete this
-    this.language = 'Fiori';
+    this.language = "Fiori";
     this.selectedStep = step;
   }
 
@@ -84,25 +84,22 @@ export class PipelineGeneratorComponent implements OnInit {
     let obj = Object.assign(
       {},
       {
-        language: 'Fiori',
+        language: "Fiori",
         steps: this.listAllSteps
       }
     );
     this.generateJobButton = true;
     this.stepsService.createPipeline(this.idProject, obj).subscribe(
       response => {
-        toast('Success', 3000, 'rounded');
+        toast("Success", 3000, "rounded");
       },
-      error => toast('Success', 3000, 'rounded')
+      error => toast("Error", 3000, "rounded")
     );
   }
 
   generateJenkinsJob() {
-    let obj = {
-      status: 'EXECUTED'
-    };
     this.stepsService
-      .runJenkinsJob(this.idProject, obj)
+      .runJenkinsJob(this.idProject)
       .subscribe(response => console.log(response));
   }
 }
