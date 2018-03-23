@@ -60,7 +60,7 @@ public class JenkinsControllerImpl implements JenkinsController {
 
 	@Override
 	@GetMapping("{projectId}/logs")
-	public List<JenkinsLogLineVO> getJenkinsLogs(
+	public ResponseEntity<List<JenkinsLogLineVO>> getJenkinsLogs(
 			@PathVariable("projectId") String projectId) throws ClientProtocolException, IOException {
 		logger.info("CTRL: Starting getJenkinsLogs method...");
 		
@@ -84,13 +84,18 @@ public class JenkinsControllerImpl implements JenkinsController {
 				logs = this.jenkinsService.getJenkinsLogs(
 					"http://54.85.215.129:8080/job/" + dto.getName().replace(" ", "%20"));
 		}
+		
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.set("Access-Control-Allow-Origin", "*");
+		ResponseEntity<List<JenkinsLogLineVO>> response = 
+				new ResponseEntity<List<JenkinsLogLineVO>>(logs, responseHeaders, HttpStatus.OK);
 				
-		return logs;
+		return response;
 	}
 
 	@Override
-	@PostMapping("{projectId}/execute-job")
-	public void buildJenkinsJob(
+	@GetMapping("{projectId}/execute-job")
+	public ResponseEntity<Object> buildJenkinsJob(
 			@PathVariable("projectId")String projectId) {
 		logger.info("CTRL: Starting buildJenkinsJob method...");
 		if(projectId == null || projectId.isEmpty())
@@ -114,6 +119,13 @@ public class JenkinsControllerImpl implements JenkinsController {
 		} catch (IOException e) {
 			throw new RuntimeException(e.getMessage());
 		}
+
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.set("Access-Control-Allow-Origin", "*");
+		ResponseEntity<Object> response = 
+				new ResponseEntity<Object>(null, responseHeaders, HttpStatus.OK);
+		
+		return response;
 	}
 
 	private static final Logger logger = Logger.getLogger(JenkinsControllerImpl.class);
@@ -125,3 +137,4 @@ public class JenkinsControllerImpl implements JenkinsController {
 	private ProjectService projectService;
 
 }
+
