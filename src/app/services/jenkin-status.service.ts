@@ -20,11 +20,7 @@ export class JenkinStatusService {
 
   getJenkinsLog(projectID: any) {
     return this.http
-      .get(
-        'https://private-anon-44de635151-pipelinegenerator.apiary-mock.com/jenkins/' +
-          projectID +
-          '/logs'
-      )
+      .get(this.url + projectID + '/logs')
       .map((response: Response) => response.json());
   }
 }

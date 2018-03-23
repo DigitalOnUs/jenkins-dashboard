@@ -24,7 +24,7 @@ export class ProjectService {
 
   getJenkinsHasPipeline(proyectId: any) {
     return this.http
-      .get('https://private-anon-44de635151-pipelinegenerator.apiary-mock.com/jenkins/' + proyectId + '/pipeline-created')
+      .get(this.url + proyectId + '/pipeline-created')
       .map((projects: Response) => projects.json());
   }
 

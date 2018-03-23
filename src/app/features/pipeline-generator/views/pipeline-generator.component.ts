@@ -1,9 +1,9 @@
-import { StepsService } from './../../../services/steps.service';
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { toast } from 'angular2-materialize';
-import { ActivatedRoute } from '@angular/router';
-import { PipelineService } from '../../../services/pipeline.service';
+import { StepsService } from "./../../../services/steps.service";
+import { Component, OnInit, EventEmitter, Output } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { toast } from "angular2-materialize";
+import { ActivatedRoute } from "@angular/router";
+import { PipelineService } from "../../../services/pipeline.service";
 declare const $: any;
 
 @Component({
@@ -13,6 +13,7 @@ declare const $: any;
 export class PipelineGeneratorComponent implements OnInit {
   language: any;
   isAddingOption: boolean;
+  generateJobButton: boolean;
   idProject: string;
   listAllSteps: any[];
   @Output() editStep = new EventEmitter();
@@ -20,29 +21,37 @@ export class PipelineGeneratorComponent implements OnInit {
   languages: any[];
   showFioriForm: boolean;
 
-  constructor(private stepsService: StepsService,
-    private pipelineService : PipelineService,
-    private activatedRoute: ActivatedRoute) {
-    this.activatedRoute.parent.parent.params.subscribe(params => this.idProject = params.id)
+  constructor(
+    private stepsService: StepsService,
+    private pipelineService: PipelineService,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.activatedRoute.parent.parent.params.subscribe(
+      params => (this.idProject = params.id)
+    );
     this.showFioriForm = false;
   }
   ngOnInit(): void {
-    $(document).ready(function () {
-      $(".collapsible").collapsible();
+    $(document).ready(function() {
+      $('.collapsible').collapsible();
     });
-    $(document).ready(function () {
+    $(document).ready(function() {
       $('select').material_select();
     });
 
-    this.languages = [{
-      id: 1,
-      'name': 'Fiori'
-    }];
+    this.languages = [
+      {
+        id: 1,
+        name: 'Fiori'
+      }
+    ];
+    this.generateJobButton = false;
     this.listAllSteps = [];
-    this.pipelineService.getPipelineStepsWithId(this.idProject)
+    this.pipelineService
+      .getPipelineStepsWithId(this.idProject)
       .subscribe(pipeline => {
         this.listAllSteps = pipeline.steps;
-      }, error => this.listAllSteps = []);
+      }, error => (this.listAllSteps = []));
   }
 
   saveStep(step: any) {
@@ -72,15 +81,28 @@ export class PipelineGeneratorComponent implements OnInit {
     this.listAllSteps.splice(i);
   }
   submitPipeline() {
-    let obj = Object.assign({},
+    let obj = Object.assign(
+      {},
       {
-        'language': 'Fiori',
-        'steps': this.listAllSteps
+        language: 'Fiori',
+        steps: this.listAllSteps
       }
     );
-    this.stepsService.createPipeline(this.idProject, obj)
-      .subscribe(response =>
-        toast('Success', 3000, 'rounded'), 
-      error => toast('Success', 3000, 'rounded'));
+    this.generateJobButton = true;
+    this.stepsService.createPipeline(this.idProject, obj).subscribe(
+      response => {
+        toast('Success', 3000, 'rounded');
+      },
+      error => toast('Success', 3000, 'rounded')
+    );
+  }
+
+  generateJenkinsJob() {
+    let obj = {
+      status: 'EXECUTED'
+    };
+    this.stepsService
+      .runJenkinsJob(this.idProject, obj)
+      .subscribe(response => console.log(response));
   }
 }
