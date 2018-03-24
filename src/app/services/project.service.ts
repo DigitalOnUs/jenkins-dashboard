@@ -21,4 +21,11 @@ export class ProjectService {
       .post(this.url + '/project', project)
       .map((project: Response) => project.json());
   }
+
+  getJenkinsHasPipeline(proyectId: any) {
+    return this.http
+      .get(this.url + proyectId + '/pipeline-created')
+      .map((projects: Response) => projects.json());
+  }
+
 }

@@ -28,13 +28,13 @@ export class NewConnectionViewComponent implements OnInit {
     this.activatedRoute.parent.parent.params.subscribe(params => this.idProject = params.id);
       this.providers = [{
           'id': 1,
-          'name': 'Azure'
+          'name': 'Microsoft Azure'
       }, {
           'id': 2,
           'name': 'Amazon Web Services'
       }, {
           'id': 3,
-          'name': 'Nexus'
+          'name': 'Google Cloud'
       }];
   }
 
