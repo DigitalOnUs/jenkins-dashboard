@@ -33,7 +33,6 @@ export class JenkinsStatusComponent implements OnInit, OnDestroy {
     this.getJenkinsLog();
     this.interval = setInterval(() => {
       this.getStatus();
-      this.getJenkinsLog();
     }, 6000);
   }
 

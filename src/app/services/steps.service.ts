@@ -33,9 +33,7 @@ export class StepsService {
   }
 
   runJenkinsJob(projectId: string) {
-    return this.http.post(
-      this.url + '/jenkins/' + projectId + '/execute-job',
-      {}
-    );
+    return this.http
+      .get(this.url + '/jenkins/' + projectId + '/execute-job');
   }
 }
