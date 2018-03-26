@@ -31,11 +31,18 @@
               </p>
             </div>
             <div class="card-action">
-              <a [routerLink]="['projects/'+project.id]">Go to project</a>
+              <a (click)="goToDashboard(project.id)" style="cursor: pointer">Go Dashboard</a>
             </div>
           </div>
         </div>
         <!--Card Project-->
+      </div>
+    </div>
+    <div *ngIf="!projects" class="row">
+      <div class="col-md-12">
+        <div class="alert alert-info" role="alert">
+            <span><strong>Oops!&nbsp;</strong>There aren't proyects yet</span>
+        </div>
       </div>
     </div>
   </div>
