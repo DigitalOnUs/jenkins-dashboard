@@ -8,7 +8,7 @@ declare interface RouteInfo {
     class: string;
 }
 export const ROUTES: RouteInfo[] = [
-    { path: 'connections/new', title: 'Create Connection',  icon: 'dashboard', class: '' },
+    { path: 'connections/new', title: 'Connection',  icon: 'dashboard', class: '' },
     { path: 'image/create', title: 'Images',  icon:'adjust', class: '' },
     { path: 'jenkins/status', title: 'Jenkins',  icon:'content_paste', class: '' },
     { path: 'pipeline/generator', title: 'Pipeline Generator',  icon:'library_books', class: '' }
