@@ -1,9 +1,12 @@
+import { NewConnectionViewComponent } from './features/connections/views/new-connection/new-connection-view.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { MaterializeModule } from 'angular2-materialize';
+import { MatStepperModule, MatStepperIntl } from "@angular/material";
+
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
@@ -18,6 +21,7 @@ import { IconsComponent } from './icons/icons.component';
 import { MapsComponent } from './maps/maps.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,9 @@ RouterModule,
     AppRoutingModule,
     MaterializeModule,
     FormsModule,
-      MaterializeModule
+      MaterializeModule,
+      MatStepperModule,
+      BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

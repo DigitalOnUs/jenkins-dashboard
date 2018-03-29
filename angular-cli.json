@@ -23,7 +23,9 @@
           "../node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
           "./assets/sass/material-dashboard.scss",
           "./assets/css/demo.css",
-          "../node_modules/materialize-css/dist/css/materialize.css"
+          "../node_modules/materialize-css/dist/css/materialize.css",
+          "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+          "styles.css"
 
       ],
       "scripts": [
