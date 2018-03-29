@@ -6,6 +6,8 @@ import { MaterializeModule } from "angular2-materialize";
 import { StepsService } from "../../../../services/steps.service";
 import { MatStepperModule, MatStepperIntl } from "@angular/material";
 import { AppComponent } from "../../../../app.component";
+import { ConnectionFormModule } from "../connection-form/connection-form.module";
+import { CreateImageModule } from "../creation-images/creation-images.module";
 
 @NgModule({
   imports: [
@@ -13,7 +15,9 @@ import { AppComponent } from "../../../../app.component";
     CommonModule,
     MaterializeModule,
     FormsModule,
-    MatStepperModule
+    MatStepperModule,
+    ConnectionFormModule,
+    CreateImageModule
   ],
   declarations: [NewConnectionViewComponent],
   exports: [NewConnectionViewComponent],

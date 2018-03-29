@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { toast } from 'angular2-materialize';
 import {ActivatedRoute} from '@angular/router';
-import {ImageService} from "../../../services/image.service";
+import { ImageService } from '../../../../services/image.service';
 declare const $: any;
 
 @Component({
   selector: 'app-create-image',
-  templateUrl: './create-image.component.html'
+  templateUrl: './creation-images.component.html'
 })
 export class CreateImageComponent implements OnInit {
   form: FormGroup;

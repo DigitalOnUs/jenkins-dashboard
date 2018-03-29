@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
-import { CreateImageComponent } from './create-image.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterializeModule } from 'angular2-materialize';
 import { CommonModule } from '@angular/common';
-import {ImageService} from '../../../services/image.service';
+import { ImageService } from '../../../../services/image.service';
+import { CreateImageComponent } from './creation-images.component';
+
 
 @NgModule({
     imports: [ReactiveFormsModule, CommonModule, MaterializeModule, FormsModule],

@@ -1,28 +1,35 @@
 <div class="main-content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header" data-background-color="blue">
-                        <h4 class="title">Create Connection</h4>
-                    </div>
-                    <div class="card-content">
-                        <div class="row">
-                            <mat-horizontal-stepper>
-                                <mat-step label="Step 1">
-                                  Content 1
-                                </mat-step>
-                                <mat-step label="Step 1">
-                                  Content 2
-                                </mat-step>
-                                <mat-step label="Step 1">
-                                    Content 3
-                                  </mat-step>
-                              </mat-horizontal-stepper>
-                        </div>
-                    </div>
-                </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header" data-background-color="blue">
+            <h4 class="title">Create Connection</h4>
+          </div>
+          <div class="card-content">
+            <div class="row">
+              <mat-horizontal-stepper>
+                <mat-step label="Provider">
+                  <app-connection-form></app-connection-form>
+                  <button mat-button matStepperNext class="btn btn-info">
+                    Next
+                  </button>
+                </mat-step>
+                <mat-step label="Image Creation">
+                  <app-create-image></app-create-image>
+                  <button mat-button matStepperPrevious type="button" class="btn btn-warning">
+                    Back
+                  </button>
+                  <button mat-button matStepperNext class="btn btn-info">
+                    Next
+                  </button>
+                </mat-step>
+                <mat-step label="Ok">Content 3</mat-step>
+              </mat-horizontal-stepper>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
+</div>;

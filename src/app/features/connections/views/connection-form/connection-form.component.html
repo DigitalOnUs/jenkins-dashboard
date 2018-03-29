@@ -1,0 +1,39 @@
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="row">
+                            <form class="col s12" [formGroup]="form">
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        <select formControlName="provider" materialize="material_select" [materializeSelectOptions]="providers">
+                                            <option value="" disabled selected>Choose provider</option>
+                                            <option *ngFor="let provider of providers" [value]="provider.name">{{provider.name}}</option>
+                                        </select>
+                                        <label>Name: </label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <input formControlName="accessKey" id="last_name" type="text" class="validate">
+                                        <label for="last_name">Access Key</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input formControlName="secret" id="disabled" type="text" class="validate">
+                                        <label for="disabled">Secret</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <button (click)="save()" [disabled]="form.invalid" class="btn btn-success"><i class="material-icons right">done</i>Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
