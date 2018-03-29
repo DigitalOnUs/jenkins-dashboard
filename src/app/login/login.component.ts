@@ -3,10 +3,10 @@ declare const $: any;
 
 @Component({
   selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class UserProfileComponent implements OnInit {
+export class LoginViewComponent implements OnInit {
 
   constructor() { }
 
