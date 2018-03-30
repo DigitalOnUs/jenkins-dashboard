@@ -48,6 +48,7 @@ import { AuthService } from './services/auth.service';
     FormsModule,
     HttpModule,
     HttpClientModule,
+    HttpClientModule,
     ComponentsModule,
 RouterModule,
     AppRoutingModule,

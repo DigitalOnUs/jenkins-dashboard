@@ -30,7 +30,7 @@ export class CreateImageComponent implements OnInit {
     $(document).ready(function() {
       $('ul.tabs').tabs();
     });
-    this.imageService.getListAllImages(this.projectId).subscribe((response) => console.log(response));
+    //this.imageService.getListAllImages(this.projectId).subscribe((response) => console.log(response));
   }
 
   sendToBack(name: any) {

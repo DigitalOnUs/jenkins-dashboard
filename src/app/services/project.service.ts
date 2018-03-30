@@ -1,14 +1,19 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 @Injectable()
 export class ProjectService {
   private url;
-  constructor(private http: Http) {
+  constructor(private http: Http, private httpClient: HttpClient) {
     this.url = 'http://54.183.152.125:8080';
   }
+
 
   getAllProject() {
     return this.http
@@ -28,4 +33,11 @@ export class ProjectService {
       .map((projects: Response) => projects.json());
   }
 
+  getProjectName(projectId: any) {
+    return this.httpClient
+      .get(
+        'https://private-anon-44de635151-pipelinegenerator.apiary-mock.com/project/' +
+          projectId
+      );
+  }
 }
