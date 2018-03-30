@@ -177,7 +177,7 @@ export class LoginViewComponent implements OnInit {
         .subscribe(
             () => {
                 alert('User created successfully !');
-                this.router.navigateByUrl('/home');
+                this.router.navigateByUrl('/');
             },
             err => alert(err)
         );
