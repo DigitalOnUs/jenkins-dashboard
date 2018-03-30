@@ -184,7 +184,7 @@ export class LoginViewComponent implements OnInit {
   }
 
   login() {
-    this.authService.login(this.formLogin.controls.email.value,this.formLogin.controls.password.value)
+    this.authService.login(this.formLogin.controls.email.value, this.formLogin.controls.password.value)
           .subscribe(
               () => this.router.navigate(['/']),
               alert

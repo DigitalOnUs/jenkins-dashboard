@@ -22,7 +22,7 @@
                                                 <!-- Switch -->
                                             </div>
                                             <hr>
-                                            <div hidden class="row">
+                                            <div class="row">
                                                 <!-- Switch -->
                                                 <div class="switch">
                                                     <label> AZURE </label>
@@ -30,19 +30,6 @@
                                                         <input (change)="sendToBack('azure')" formControlName="azure" type="checkbox">
                                                         <span class="lever"></span>
                                                         <i *ngIf="form.controls.azure.value == true" class="material-icons right" style="font-size: 15px">done</i>
-                                                    </label>
-                                                </div>
-                                                <!-- Switch -->
-                                            </div>
-                                            <hr hidden>
-                                            <div class="row">
-                                                <!-- Switch -->
-                                                <div class="switch">
-                                                    <label> JENKINS SLAVE</label>
-                                                    <label>
-                                                        <input (change)="sendToBack('slave')" formControlName="slave" type="checkbox">
-                                                        <span class="lever"></span>
-                                                        <i *ngIf="form.controls.slave.value == true" class="material-icons right" style="font-size: 15px">done</i>
                                                     </label>
                                                 </div>
                                                 <!-- Switch -->
