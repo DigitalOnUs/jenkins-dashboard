@@ -6,6 +6,7 @@ import {
   PathLocationStrategy
 } from "@angular/common";
 import * as firebase from "firebase/app";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: "app-navbar",
@@ -18,7 +19,7 @@ export class NavbarComponent implements OnInit {
   private toggleButton: any;
   private sidebarVisible: boolean;
 
-  constructor(location: Location, private element: ElementRef) {
+  constructor(private authService: AuthService ,location: Location, private element: ElementRef) {
     this.location = location;
     this.sidebarVisible = false;
   }
@@ -71,14 +72,6 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    firebase
-      .auth()
-      .signOut()
-      .then(function() {
-        // Sign-out successful.
-      })
-      .catch(function(error) {
-        // An error happened.
-      });
+  this.authService.logout()
   }
 }

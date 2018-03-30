@@ -16,10 +16,11 @@ import { UpgradeComponent } from './upgrade/upgrade.component';
 import { LoginViewComponent } from './login/login.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { HttpClientModule } from '@angular/common/http'
+import { AuthService } from "./services/auth.service";
 
 
 const routes: Routes = [
-  { path: '', component: ProjectsViewComponent, canActivate: [AuthGuard] },
+  { path: '', component: ProjectsViewComponent,  canActivate: [AuthGuard]},
   { path: 'login', component: LoginViewComponent },
   { path: 'table-list', component: TableListComponent },
   {
@@ -42,6 +43,6 @@ const routes: Routes = [
     HttpClientModule
   ],
   exports: [],
-  providers: [AuthGuard]
+  providers: [AuthService,AuthGuard]
 })
 export class AppRoutingModule {}
