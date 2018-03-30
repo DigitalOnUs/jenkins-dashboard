@@ -11,6 +11,7 @@ import { Router, NavigationEnd, NavigationStart } from "@angular/router";
 import { Subscription } from "rxjs/Subscription";
 import PerfectScrollbar from "perfect-scrollbar";
 
+
 declare const $: any;
 
 @Component({

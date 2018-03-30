@@ -6,13 +6,9 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { MaterializeModule } from 'angular2-materialize';
 import { MatStepperModule, MatStepperIntl } from "@angular/material";
-
-
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
-
 import { AppComponent } from './app.component';
-
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TableListComponent } from './table-list/table-list.component';
 import { TypographyComponent } from './typography/typography.component';
@@ -22,12 +18,23 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { UpgradeComponent } from './upgrade/upgrade.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginViewComponent } from './login/login.component';
+import { LoginModule } from './login/login.component.module';
+import { HttpClientModule } from '@angular/common/http'
+
+//firebase
+import { AngularFireModule } from 'angularfire2';
+import { environment } from 'environments/environment';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AuthGuard } from './services/auth-guard.service';
+import { AuthService } from './services/auth.service';
+
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    LoginViewComponent,
     TableListComponent,
     TypographyComponent,
     IconsComponent,
@@ -40,6 +47,7 @@ import { LoginViewComponent } from './login/login.component';
     BrowserModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     ComponentsModule,
 RouterModule,
     AppRoutingModule,
@@ -47,9 +55,12 @@ RouterModule,
     FormsModule,
       MaterializeModule,
       MatStepperModule,
-      BrowserAnimationsModule
+      BrowserAnimationsModule,
+      LoginModule,
+      AngularFireModule.initializeApp(environment.firebase),
+      AngularFireAuthModule // imports firebase/auth, only needed for auth features
   ],
-  providers: [],
+  providers: [AuthService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
