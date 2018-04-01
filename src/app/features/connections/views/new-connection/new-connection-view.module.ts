@@ -1,13 +1,20 @@
-import { NewConnectionViewComponent } from "./new-connection-view.component";
-import { NgModule } from "@angular/core";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { CommonModule } from "@angular/common";
-import { MaterializeModule } from "angular2-materialize";
-import { StepsService } from "../../../../services/steps.service";
-import { MatStepperModule, MatStepperIntl } from "@angular/material";
-import { AppComponent } from "../../../../app.component";
-import { ConnectionFormModule } from "../connection-form/connection-form.module";
-import { CreateImageModule } from "../creation-images/creation-images.module";
+import { NewConnectionViewComponent } from './new-connection-view.component';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { MaterializeModule } from 'angular2-materialize';
+import { StepsService } from '../../../../services/steps.service';
+import {
+  MatStepperModule,
+  MatStepperIntl,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSelectModule,
+  MatCheckboxModule,
+  MatSlideToggleModule,
+  MatProgressBarModule
+} from '@angular/material';
+import { AppComponent } from '../../../../app.component';
 
 @NgModule({
   imports: [
@@ -16,8 +23,12 @@ import { CreateImageModule } from "../creation-images/creation-images.module";
     MaterializeModule,
     FormsModule,
     MatStepperModule,
-    ConnectionFormModule,
-    CreateImageModule
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatSlideToggleModule,
+    MatProgressBarModule
   ],
   declarations: [NewConnectionViewComponent],
   exports: [NewConnectionViewComponent],

@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { MaterializeModule } from 'angular2-materialize';
-import { MatStepperModule, MatStepperIntl } from "@angular/material";
+import { MatStepperModule, MatStepperIntl, MatFormFieldModule, MatInputModule, MatSelectModule, MatProgressBarModule } from "@angular/material";
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
@@ -59,7 +59,13 @@ RouterModule,
       BrowserAnimationsModule,
       LoginModule,
       AngularFireModule.initializeApp(environment.firebase),
-      AngularFireAuthModule // imports firebase/auth, only needed for auth features
+      AngularFireAuthModule, // imports firebase/auth, only needed for auth features
+      MatFormFieldModule,
+      MatStepperModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatSelectModule,
+      MatProgressBarModule
   ],
   providers: [AuthService,AuthGuard],
   bootstrap: [AppComponent]
