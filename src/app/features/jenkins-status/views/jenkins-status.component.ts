@@ -32,9 +32,11 @@ export class JenkinsStatusComponent implements OnInit, OnDestroy {
      * Make an Http every N second
      */
     this.getStatus();
+    this.getJenkinsLog();
     this.interval = setInterval(() => {
-      if (this.checkboxLogger == 'log') this.getJenkinsLog();
-      else this.getJenkinsOutput();
+      this.checkboxLogger === 'log'
+        ? this.getJenkinsLog()
+        : 'output' ? this.getJenkinsOutput() : null;
       this.getStatus();
     }, 2000);
   }
