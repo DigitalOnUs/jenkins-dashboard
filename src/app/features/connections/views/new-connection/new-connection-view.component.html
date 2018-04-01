@@ -4,7 +4,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header" data-background-color="blue">
-            <h4 class="title">Create Connection</h4>
+            <h4 class="title">Provider Configuration</h4>
           </div>
           <div class="card-content">
             <div class="row">
@@ -63,9 +63,22 @@
                 </mat-step>
                 <mat-step>
                   <ng-template matStepLabel>Done</ng-template>
-                  <mat-progress-bar mode="buffer"></mat-progress-bar>
+                  <br>
+                  <div class="row" *ngIf="!saving">
+                      <span class="alert alert-primary">You're ready to save changes</span>
+                  </div>
+                  <div class="row" *ngIf="savingCorrect">
+                      <span class="alert alert-success"> Good! You're done</span>
+                  </div>
+                  <div class="row" *ngIf="errorSaving">
+                      <span class="alert alert-danger"> Oops! Try again</span>
+                  </div>
+                  <div class="row">
+                      <mat-progress-bar *ngIf="loading" mode="buffer"></mat-progress-bar>
+                  </div>
+                  
                   <div>
-                      <button class="btn btn-danger" mat-button (click)="stepper.reset()">Reset</button>
+                      <button class="btn btn-danger" mat-button (click)="stepper.reset();">Reset</button>
                       <button (click)="save()" class="btn btn-success" mat-button>Create</button>
                   </div>
                 </mat-step>
