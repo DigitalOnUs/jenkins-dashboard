@@ -77,10 +77,45 @@ public class JenkinsServiceImpl implements JenkinsService {
 		request.setHeader("Jenkins-Crumb", "d1a6f7d99d29ee0dd779259c696f02fb");
 		client.execute(request);
 	}
+	
+	public List<JenkinsLogLineVO> getJenkinsConsoleOutput(String url) throws ClientProtocolException, IOException {
+		logger.info("SERVICE: Starting getJenkinsConsoleOuput method...");
+		
+		if(url == null || url.isEmpty())
+			throw new RuntimeException("The url must be not null or empty");
+		
+		HttpClient client = HttpClientBuilder.create().build();
+		
+		HttpGet request = new HttpGet(url + "/lastBuild/consoleText");
+		request.setHeader("Authorization", "Basic YWRtaW46NTUzOWFlOTMzZmFkNGE2NGFiNDlmOGE2NTRiYjhhMjE=");
+		request.setHeader("Access-Control-Allow-Origin", "*");
+		
+		HttpResponse response = client.execute(request);
+		List<JenkinsLogLineVO> logs = new ArrayList<>();
+		if(response.getStatusLine().getStatusCode() == 200) {
+			InputStream in = response.getEntity().getContent();
+			String body = IOUtils.toString(in, "UTF-8");
+			JenkinsLogLineVO firstLine = new JenkinsLogLineVO();
+			firstLine.setLineNumber(0);
+			firstLine.setMessage("Lanzada por el usuario admin");
+			logs.add(firstLine);
+			String consoleText = new String(body);
+			String [] lines = consoleText.split("\n");
+				int index;
+				for(index = 0; index < lines.length; index++) {
+					JenkinsLogLineVO line = new JenkinsLogLineVO();
+					line.setLineNumber(index + 1);
+					line.setMessage(lines[index]);
+					logs.add(line);
+				}
+		}
+		
+		return logs;
+	}
 
 	@Override
-	public List<JenkinsLogLineVO> getJenkinsLogs(String url) throws ClientProtocolException, IOException {
-		logger.info("SERVICE: Starting getJenkinsLogs method...");
+	public List<JenkinsLogLineVO> getJenkinsChanges(String url) throws ClientProtocolException, IOException {
+		logger.info("SERVICE: Starting getJenkinsChanges method...");
 		
 		if(url == null || url.isEmpty())
 			throw new RuntimeException("The url must be not null or empty");
@@ -96,10 +131,6 @@ public class JenkinsServiceImpl implements JenkinsService {
 		if(response.getStatusLine().getStatusCode() == 200) {
 			InputStream in = response.getEntity().getContent();
 			String body = IOUtils.toString(in, "UTF-8");
-			JenkinsLogLineVO firstLine = new JenkinsLogLineVO();
-			firstLine.setLineNumber(0);
-			firstLine.setMessage("Lanzada por el usuario admin");
-			logs.add(firstLine);
 			try {
 				JSONObject json = new JSONObject(body);
 				JSONObject changes = json.getJSONArray("changeSets").getJSONObject(0);

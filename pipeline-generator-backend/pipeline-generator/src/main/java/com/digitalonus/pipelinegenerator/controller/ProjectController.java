@@ -9,4 +9,5 @@ import com.digitalonus.pipelinegenerator.vo.ProjectVO;
 public interface ProjectController {
 	ProjectVO createProject(ProjectVO projectVO, BindingResult bindingResult);
 	List<ProjectVO> getAllProject();
+	ProjectVO getProjectData(String projectId);
 }

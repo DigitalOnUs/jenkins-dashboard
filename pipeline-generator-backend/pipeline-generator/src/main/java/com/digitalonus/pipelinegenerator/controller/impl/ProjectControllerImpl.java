@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,6 +49,25 @@ public class ProjectControllerImpl implements ProjectController {
 		List<ProjectDTO> projectsDTO = this.projectService.getAll();
 		projectsVO = this.projectParser.parseToVOList(projectsDTO);
 		return projectsVO;
+	}
+
+	@GetMapping("/{projectId}")
+	@Override
+	public ProjectVO getProjectData(
+			@PathVariable("projectId") String projectId) {
+		logger.info("CTRL: Starting getProjectData method...");
+		
+		if(projectId == null || projectId.isEmpty())
+			throw new RuntimeException("The project id must not be null or empty");
+		
+		ProjectDTO projectDTO = this.projectService.getProjectInfoWithId(projectId);
+			
+		if(projectDTO == null)
+			throw new RuntimeException("Project not found with id: " + projectId);
+		
+		ProjectVO projectVO = this.projectParser.parseToVO(projectDTO);
+		
+		return projectVO;
 	}
 
 	private static final Logger logger = 

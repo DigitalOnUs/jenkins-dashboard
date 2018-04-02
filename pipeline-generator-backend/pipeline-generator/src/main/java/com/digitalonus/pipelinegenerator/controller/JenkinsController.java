@@ -12,6 +12,9 @@ import com.digitalonus.pipelinegenerator.vo.JenkinsStatusVO;
 public interface JenkinsController {
 	ResponseEntity<JenkinsStatusVO> getJenkinsStatus(String projectId);
 	ResponseEntity<Object> buildJenkinsJob(String projectId);
-	ResponseEntity<List<JenkinsLogLineVO>> getJenkinsLogs(String projectId) throws ClientProtocolException, IOException;
+	ResponseEntity<List<JenkinsLogLineVO>> getJenkinsConsoleOutput(
+			String projectId) throws ClientProtocolException, IOException;
+	ResponseEntity<List<JenkinsLogLineVO>> getJenkinsChanges(
+			String projectId) throws ClientProtocolException, IOException;
 }
 

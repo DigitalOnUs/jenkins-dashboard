@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -59,8 +58,8 @@ public class JenkinsControllerImpl implements JenkinsController {
 	}
 
 	@Override
-	@GetMapping("{projectId}/logs")
-	public ResponseEntity<List<JenkinsLogLineVO>> getJenkinsLogs(
+	@GetMapping("{projectId}/console-output")
+	public ResponseEntity<List<JenkinsLogLineVO>> getJenkinsConsoleOutput(
 			@PathVariable("projectId") String projectId) throws ClientProtocolException, IOException {
 		logger.info("CTRL: Starting getJenkinsLogs method...");
 		
@@ -81,7 +80,42 @@ public class JenkinsControllerImpl implements JenkinsController {
 		System.out.println(statusDTO.getStatus());
 		
 		if(statusDTO.getStatus() != null && statusDTO.getStatus() != "PENDING") {
-				logs = this.jenkinsService.getJenkinsLogs(
+				logs = this.jenkinsService.getJenkinsConsoleOutput(
+					"http://54.85.215.129:8080/job/" + dto.getName().replace(" ", "%20"));
+		}
+		
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.set("Access-Control-Allow-Origin", "*");
+		ResponseEntity<List<JenkinsLogLineVO>> response = 
+				new ResponseEntity<List<JenkinsLogLineVO>>(logs, responseHeaders, HttpStatus.OK);
+				
+		return response;
+	}
+	
+	@Override
+	@GetMapping("{projectId}/changes")
+	public ResponseEntity<List<JenkinsLogLineVO>> getJenkinsChanges(
+			@PathVariable("projectId") String projectId) throws ClientProtocolException, IOException {
+		logger.info("CTRL: Starting getJenkinsLogs method...");
+		
+		if (projectId == null || projectId.isEmpty())
+			throw new RuntimeException("The project id must be not null or empty");
+
+		ProjectDTO dto = this.projectService.getProjectInfoWithId(projectId);
+		
+		if(dto == null)
+			throw new RuntimeException("Project not found with id: " + projectId);
+		
+		JenkinsStatusDTO statusDTO = 
+				this.jenkinsService.getJenkinsStatus(
+						"http://54.85.215.129:8080/job/" + dto.getName().replace(" ", "%20"));
+		
+		List<JenkinsLogLineVO> logs = new ArrayList<>();
+		
+		System.out.println(statusDTO.getStatus());
+		
+		if(statusDTO.getStatus() != null && statusDTO.getStatus() != "PENDING") {
+				logs = this.jenkinsService.getJenkinsChanges(
 					"http://54.85.215.129:8080/job/" + dto.getName().replace(" ", "%20"));
 		}
 		

@@ -11,5 +11,6 @@ import com.digitalonus.pipelinegenerator.vo.JenkinsLogLineVO;
 public interface JenkinsService {
 	JenkinsStatusDTO getJenkinsStatus(String url);
 	void executeJenkinsJob(String url) throws ClientProtocolException, IOException;
-	List<JenkinsLogLineVO> getJenkinsLogs(String url) throws ClientProtocolException, IOException;
+	List<JenkinsLogLineVO> getJenkinsChanges(String url) throws ClientProtocolException, IOException;
+	List<JenkinsLogLineVO> getJenkinsConsoleOutput(String url) throws ClientProtocolException, IOException;
 }
