@@ -38,3 +38,4 @@ pipeline-generator-backend/pipeline-generator/.classpath
 pipeline-generator-backend/pipeline-generator/.project
 pipeline-generator-backend/pipeline-generator/.mvn
 pipeline-generator-backend/pipeline-generator/.settings
+pipeline-generator-backend/pipeline-generator/src/main/resources/terraform/aws/.terraform
