@@ -16,7 +16,7 @@
                       <mat-form-field>
                         <mat-select formControlName="provider" placeholder="Provider" required>
                           <mat-option disabled>Choose a provider</mat-option>
-                          <mat-option *ngFor="let provider of providers" [value]="provider.value">
+                          <mat-option *ngFor="let provider of providers" [value]="provider">
                             {{ provider.viewValue }}
                           </mat-option>
                         </mat-select>

@@ -11,9 +11,8 @@ const httpOptions = {
 export class ProjectService {
   private url;
   constructor(private http: Http, private httpClient: HttpClient) {
-    this.url = 'http://54.183.152.125:8080';
+    this.url = 'http://d041b932.ngrok.io';
   }
-
 
   getAllProject() {
     return this.http
@@ -34,10 +33,6 @@ export class ProjectService {
   }
 
   getProjectName(projectId: any) {
-    return this.httpClient
-      .get(
-        'https://private-anon-44de635151-pipelinegenerator.apiary-mock.com/project/' +
-          projectId
-      );
+    return this.httpClient.get(this.url + '/project/' + projectId);
   }
 }

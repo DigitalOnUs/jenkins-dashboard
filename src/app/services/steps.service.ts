@@ -1,13 +1,13 @@
-import { Injectable } from "@angular/core";
-import { Http, Response } from "@angular/http";
-import { Observable } from "rxjs/Observable";
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/catch";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    "Content-Type": "application/json"
+    'Content-Type': 'application/json'
     //'Authorization': 'my-auth-token'
   })
 };
@@ -16,7 +16,7 @@ const httpOptions = {
 export class StepsService {
   private url;
   constructor(private http: Http, private httpClient: HttpClient) {
-    this.url = 'http://54.183.152.125:8080';
+    this.url = 'http://d041b932.ngrok.io';
   }
 
   getListAllSteps(id: string) {
@@ -45,10 +45,7 @@ export class StepsService {
   }
 
   getProviderConfiguration(projectId: any) {
-    return this.httpClient.get(
-      'https://private-anon-44de635151-pipelinegenerator.apiary-mock.com/provider/' +
-        projectId
-    );
+    return this.httpClient.get(this.url + '/provider/' + projectId);
   }
 
   createConnectionAndProviders(
@@ -56,7 +53,7 @@ export class StepsService {
     confAndProvider: any
   ): Observable<any> {
     return this.httpClient.post<any>(
-      'https://private-anon-44de635151-pipelinegenerator.apiary-mock.com/provider/' + projectId + '/create-services-provider',
+      this.url + '/provider/' + projectId + '/create-services-provider',
       confAndProvider,
       httpOptions
     );

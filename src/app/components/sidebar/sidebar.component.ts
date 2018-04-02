@@ -44,7 +44,7 @@ export class SidebarComponent implements OnInit {
     private projectService: ProjectService,
     private router: ActivatedRoute
   ) {
-    this.router.parent.parent.params.subscribe(
+    this.router.parent.params.subscribe(
       params => (this.projectId = params.id)
     );
   }
