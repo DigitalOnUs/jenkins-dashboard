@@ -24,6 +24,8 @@
     "@angular/platform-browser-dynamic": "5.0.0",
     "@angular/platform-server": "5.0.0",
     "@angular/router": "5.0.0",
+    "@ngx-progressbar/core": "^4.1.1",
+    "@ngx-progressbar/http": "^4.1.1",
     "angular2-materialize": "^15.1.10",
     "angularfire2": "^5.0.0-rc.6",
     "arrive": "2.4.1",

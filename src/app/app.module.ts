@@ -20,6 +20,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginViewComponent } from './login/login.component';
 import { LoginModule } from './login/login.component.module';
 import { HttpClientModule } from '@angular/common/http'
+import { NgProgressModule } from '@ngx-progressbar/core';
+import { NgProgressHttpModule } from '@ngx-progressbar/http';
 
 //firebase
 import { AngularFireModule } from 'angularfire2';
@@ -27,9 +29,6 @@ import { environment } from 'environments/environment';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
-
-
-
 
 @NgModule({
   declarations: [
@@ -65,7 +64,9 @@ RouterModule,
       MatFormFieldModule,
       MatInputModule,
       MatSelectModule,
-      MatProgressBarModule
+      MatProgressBarModule,
+      NgProgressModule.forRoot(),
+      NgProgressHttpModule
   ],
   providers: [AuthService,AuthGuard],
   bootstrap: [AppComponent]

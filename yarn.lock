@@ -303,6 +303,19 @@
     tree-kill "^1.0.0"
     webpack-sources "^1.1.0"
 
+"@ngx-progressbar/core@4.1.1", "@ngx-progressbar/core@^4.1.1":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@ngx-progressbar/core/-/core-4.1.1.tgz#31b7ffa9de1d94380819a94aa0a31cedb044f37c"
+  dependencies:
+    tslib "^1.7.1"
+
+"@ngx-progressbar/http@^4.1.1":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@ngx-progressbar/http/-/http-4.1.1.tgz#c0618334cbd623ecba1ded1a1b21063617b6f309"
+  dependencies:
+    "@ngx-progressbar/core" "4.1.1"
+    tslib "^1.7.1"
+
 "@schematics/angular@0.3.2":
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-0.3.2.tgz#be209a032a3e4577992d94fbaa14bd4bfde485e2"
