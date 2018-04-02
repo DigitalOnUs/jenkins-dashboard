@@ -23,7 +23,8 @@
           "../node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
           "./assets/sass/material-dashboard.scss",
           "./assets/css/demo.css",
-          "../node_modules/materialize-css/dist/css/materialize.css"
+          "../node_modules/materialize-css/dist/css/materialize.css",
+          "styles.css"
 
       ],
       "scripts": [

@@ -1,11 +1,11 @@
-import { JenkinStatusService } from "./../../../services/jenkin-status.service";
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { toast } from "angular2-materialize";
-import { ActivatedRoute } from "@angular/router";
+import { JenkinStatusService } from './../../../services/jenkin-status.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { toast } from 'angular2-materialize';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: "app-jenkins-status",
-  templateUrl: "jenkins-status.component.html"
+  selector: 'app-jenkins-status',
+  templateUrl: 'jenkins-status.component.html'
 })
 export class JenkinsStatusComponent implements OnInit, OnDestroy {
   isGettingStatus: boolean;
@@ -15,6 +15,7 @@ export class JenkinsStatusComponent implements OnInit, OnDestroy {
   interval: any;
   idProject: any;
   logs: any[];
+  checkboxLogger: any;
   constructor(
     private jenkinStatusService: JenkinStatusService,
     private activatedRoute: ActivatedRoute
@@ -26,14 +27,18 @@ export class JenkinsStatusComponent implements OnInit, OnDestroy {
     this.activatedRoute.parent.parent.params.subscribe(
       params => (this.idProject = params.id)
     );
+    this.checkboxLogger = 'log';
     /**
      * Make an Http every N second
      */
     this.getStatus();
     this.getJenkinsLog();
     this.interval = setInterval(() => {
+      this.checkboxLogger === 'log'
+        ? this.getJenkinsLog()
+        : 'output' ? this.getJenkinsOutput() : null;
       this.getStatus();
-    }, 6000);
+    }, 2000);
   }
 
   ngOnDestroy() {
@@ -70,6 +75,18 @@ export class JenkinsStatusComponent implements OnInit, OnDestroy {
         this.logs.sort(function(a, b) {
           return a.lineNumber - b.lineNumber;
         });
-      }, (err: any) => this.isGettingLogs = false);
+      }, (err: any) => (this.isGettingLogs = false));
+  }
+
+  getJenkinsOutput() {
+    this.jenkinStatusService
+      .getJenkinsOutputLog(this.idProject)
+      .subscribe(response => {
+        this.isGettingLogs = false;
+        this.logs = response;
+        this.logs.sort(function(a, b) {
+          return a.lineNumber - b.lineNumber;
+        });
+      }, (err: any) => (this.isGettingLogs = false));
   }
 }

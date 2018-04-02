@@ -1,41 +1,92 @@
 <div class="main-content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header" data-background-color="blue">
-                        <h4 class="title">Create Connection</h4>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header" data-background-color="blue">
+            <h4 class="title">Provider Configuration</h4>
+          </div>
+          <div class="card-content">
+            <div class="row">
+              <mat-vertical-stepper [linear]="isLinear" #stepper="matVerticalStepper">
+                <mat-step [stepControl]="firstFormGroup">
+                  <form [formGroup]="firstFormGroup">
+                    <ng-template matStepLabel>Provider</ng-template>
+                    <div class="row">
+                      <mat-form-field>
+                        <mat-select formControlName="provider" placeholder="Provider" required>
+                          <mat-option disabled>Choose a provider</mat-option>
+                          <mat-option *ngFor="let provider of providers" [value]="provider">
+                            {{ provider.viewValue }}
+                          </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="firstFormGroup.hasError('required')">Please choose a provider</mat-error>
+                      </mat-form-field>
                     </div>
-                    <div class="card-content">
-                        <div class="row">
-                            <form class="col s12" [formGroup]="form">
-                                <div class="row">
-                                    <div class="input-field col s6">
-                                        <select formControlName="provider" materialize="material_select" [materializeSelectOptions]="providers">
-                                            <option value="" disabled selected>Choose provider</option>
-                                            <option *ngFor="let provider of providers" [value]="provider.name">{{provider.name}}</option>
-                                        </select>
-                                        <label>Name: </label>
-                                    </div>
-                                    <div class="input-field col s6">
-                                        <input formControlName="accessKey" id="last_name" type="text" class="validate">
-                                        <label for="last_name">Access Key</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <input formControlName="secret" id="disabled" type="text" class="validate">
-                                        <label for="disabled">Secret</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <button (click)="save()" [disabled]="form.invalid" class="btn btn-success"><i class="material-icons right">done</i>Save</button>
-                                </div>
-                            </form>
-                        </div>
+                    <div class="row">
+                      <div class="input-field col s3">
+                        <input formControlName="accessKey" placeholder="Access Key *" id="accessKey" type="text" class="validate" required>
+                      </div>
                     </div>
-                </div>
+                    <div class="row">
+                      <div class="input-field col s3">
+                        <input formControlName="secretKey" placeholder="Secret Key *" id="secretKey" type="text" class="validate" required>
+                      </div>
+                    </div>
+                    <button [disabled]="firstFormGroup.invalid" class="btn btn-primary" mat-button matStepperNext>Next</button>
+                  </form>
+                </mat-step>
+                <mat-step [stepControl]="secondFormGroup">
+                  <form [formGroup]="secondFormGroup">
+                    <ng-template matStepLabel>Images</ng-template>
+                    <div class="row">
+                      <mat-slide-toggle formControlName="jenkins">Jenkins Slave</mat-slide-toggle>
+                    </div>
+                    <div class="row">
+                      <mat-slide-toggle formControlName="azure">Azure</mat-slide-toggle>
+                    </div>
+                    <div class="row">
+                      <mat-slide-toggle formControlName="gerrit">Gerrit</mat-slide-toggle>
+                    </div>
+                    <div class="row">
+                      <mat-slide-toggle formControlName="nexus">Nexus</mat-slide-toggle>
+                    </div>
+                    <div>
+                      <div class="row">
+                        <button class="btn btn-warning" mat-button matStepperPrevious>Back</button>
+                      </div>
+                      <div class="row">
+                        <button [disabled]="secondFormGroup.invalid" class="btn btn-primary" mat-button matStepperNext>Next</button>
+                      </div>
+                    </div>
+                  </form>
+                </mat-step>
+                <mat-step>
+                  <ng-template matStepLabel>Done</ng-template>
+                  <br>
+                  <div class="row" *ngIf="!saving">
+                      <span class="alert alert-primary">You're ready to save changes</span>
+                  </div>
+                  <div class="row" *ngIf="savingCorrect">
+                      <span class="alert alert-success"> Good! You're done</span>
+                  </div>
+                  <div class="row" *ngIf="errorSaving">
+                      <span class="alert alert-danger"> Oops! Try again</span>
+                  </div>
+                  <div class="row">
+                      <mat-progress-bar *ngIf="loading" mode="buffer"></mat-progress-bar>
+                  </div>
+                  
+                  <div>
+                      <button class="btn btn-danger" mat-button (click)="stepper.reset();">Reset</button>
+                      <button (click)="save()" class="btn btn-success" mat-button>Create</button>
+                  </div>
+                </mat-step>
+              </mat-vertical-stepper>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
+</div>;

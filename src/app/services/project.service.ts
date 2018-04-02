@@ -1,13 +1,17 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 @Injectable()
 export class ProjectService {
   private url;
-  constructor(private http: Http) {
-    this.url = 'http://54.183.152.125:8080';
+  constructor(private http: Http, private httpClient: HttpClient) {
+    this.url = 'http://d041b932.ngrok.io';
   }
 
   getAllProject() {
@@ -28,4 +32,7 @@ export class ProjectService {
       .map((projects: Response) => projects.json());
   }
 
+  getProjectName(projectId: any) {
+    return this.httpClient.get(this.url + '/project/' + projectId);
+  }
 }

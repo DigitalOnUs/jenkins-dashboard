@@ -9,7 +9,7 @@ export class JenkinStatusService {
   url: string;
 
   constructor(private http: Http) {
-    this.url = 'http://54.183.152.125:8080';
+    this.url = 'http://4325149a.ngrok.io';
   }
 
   getJenkinStatus(idProject: any) {
@@ -20,7 +20,17 @@ export class JenkinStatusService {
 
   getJenkinsLog(projectID: any) {
     return this.http
-      .get(this.url + '/jenkins/' + projectID + '/logs')
+      .get(this.url + '/jenkins/' + projectID + '/changes')
+      .map((response: Response) => response.json());
+  }
+
+  getJenkinsOutputLog(projectID: any) {
+    return this.http
+      .get(
+        this.url + '/jenkins/' +
+          projectID +
+          '/console-output'
+      )
       .map((response: Response) => response.json());
   }
 }

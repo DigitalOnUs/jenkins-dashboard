@@ -1,49 +1,71 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import { toast } from "angular2-materialize";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { toast } from 'angular2-materialize';
 import { StepsService } from '../../../../services/steps.service';
 import { ActivatedRoute } from '@angular/router';
-
 
 @Component({
   selector: 'app-new-connection',
   templateUrl: './new-connection-view.component.html'
 })
 export class NewConnectionViewComponent implements OnInit {
-  form: FormGroup;
-  providers: any[];
+  isLinear = true;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
   idProject: any;
-
-  constructor(fb: FormBuilder,
-              private stepService: StepsService,
-              private activatedRoute: ActivatedRoute) {
-      this.form = fb.group({
-          provider: ['', Validators.required],
-          accessKey: ['', Validators.required],
-          secret: ['', Validators.required]
-      });
-
-  }
+  saving: boolean;
+  savingCorrect: boolean;
+  errorSaving: boolean;
+  loading: boolean;
+  providers = [
+    { value: 'aws', viewValue: 'Amazon Web Services' },
+    { value: 'gcp', viewValue: 'Google Cloud Platform' },
+    { value: 'ms', viewValue: 'Microsoft Azure' }
+  ];
+  constructor(
+    private _formBuilder: FormBuilder,
+    private stepService: StepsService,
+    private activatedRoute: ActivatedRoute
+  ) {}
   ngOnInit() {
-    this.activatedRoute.parent.parent.params.subscribe(params => this.idProject = params.id);
-      this.providers = [{
-          'id': 1,
-          'name': 'Microsoft Azure'
-      }, {
-          'id': 2,
-          'name': 'Amazon Web Services'
-      }, {
-          'id': 3,
-          'name': 'Google Cloud'
-      }];
-  }
-
-  save(){
-    this.stepService.createConnection(this.idProject, this.form.value).subscribe(() => {
-        toast('Save', 3000, 'rounded')
-    }, (err) => {
-        console.error(err);
+    this.activatedRoute.parent.parent.params.subscribe(params => {
+      this.idProject = params.id;
+      this.stepService
+        .getProviderConfiguration(params.id)
+        .subscribe(data => this.firstFormGroup.patchValue(data));
+    });
+    this.firstFormGroup = this._formBuilder.group({
+      provider: ['', Validators.required],
+      accessKey: ['', Validators.required],
+      secretKey: ['', Validators.required]
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      jenkins: [false],
+      azure: [false],
+      gerrit: [false],
+      nexus: [false]
     });
   }
 
+  save() {
+    this.saving = true;
+    this.loading = true;
+    const obj = {
+      credentials: this.firstFormGroup.value,
+      services: this.secondFormGroup.value
+    };
+    console.log(obj);
+    this.stepService
+      .createConnectionAndProviders(this.idProject, obj)
+      .subscribe(data => {
+        this.savingCorrect = true;
+        this.loading = false;
+        console.log(data);
+      }, err => (this.errorSaving = true, this.loading = false));
+  }
+  resetVariables(){
+    this.saving = false;
+  this.savingCorrect = false;
+  this.errorSaving = false
+  }
 }

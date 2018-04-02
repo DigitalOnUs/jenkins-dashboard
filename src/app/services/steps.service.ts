@@ -1,14 +1,22 @@
-import { Injectable } from "@angular/core";
-import { Http, Response } from "@angular/http";
-import { Observable } from "rxjs/Observable";
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/catch";
+import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+    //'Authorization': 'my-auth-token'
+  })
+};
 
 @Injectable()
 export class StepsService {
   private url;
-  constructor(private http: Http) {
-    this.url = "http://54.183.152.125:8080";
+  constructor(private http: Http, private httpClient: HttpClient) {
+    this.url = 'http://d041b932.ngrok.io';
   }
 
   getListAllSteps(id: string) {
@@ -33,7 +41,21 @@ export class StepsService {
   }
 
   runJenkinsJob(projectId: string) {
-    return this.http
-      .get(this.url + '/jenkins/' + projectId + '/execute-job');
+    return this.http.get(this.url + '/jenkins/' + projectId + '/execute-job');
+  }
+
+  getProviderConfiguration(projectId: any) {
+    return this.httpClient.get(this.url + '/provider/' + projectId);
+  }
+
+  createConnectionAndProviders(
+    projectId: any,
+    confAndProvider: any
+  ): Observable<any> {
+    return this.httpClient.post<any>(
+      this.url + '/provider/' + projectId + '/create-services-provider',
+      confAndProvider,
+      httpOptions
+    );
   }
 }
