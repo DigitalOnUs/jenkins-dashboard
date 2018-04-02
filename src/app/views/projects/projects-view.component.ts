@@ -1,12 +1,13 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 declare const $: any;
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { ProjectService } from "../../services/project.service";
-import { Router } from "@angular/router";
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ProjectService } from '../../services/project.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: "app-projects-view",
-  templateUrl: "./projects-view.component.html"
+  selector: 'app-projects-view',
+  templateUrl: './projects-view.component.html'
 })
 export class ProjectsViewComponent implements OnInit {
   regionToNewProjectForm: any[];
@@ -19,8 +20,8 @@ export class ProjectsViewComponent implements OnInit {
     this.id = 2;
     // TODO: Catalog from backend
     this.regionToNewProjectForm = [
-      { name: "United States" },
-      { name: "Mexico" },
+      { name: 'United States' },
+      { name: 'Mexico' },
       { name: 'India' }
     ];
     //TODO: Get request from backend
@@ -32,7 +33,8 @@ export class ProjectsViewComponent implements OnInit {
   constructor(
     fb: FormBuilder,
     private projectService: ProjectService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
     $(document).ready(function() {
       // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
@@ -54,10 +56,17 @@ export class ProjectsViewComponent implements OnInit {
   }
 
   goToDashboard(id: any) {
-    this.projectService.getJenkinsHasPipeline(id).subscribe(response => {
-      response.isCreated
-        ? this.router.navigate(['projects/' + id + '/jenkins/status'])
-        : this.router.navigate(['projects/' + id + '/connections/new']);
-    }, (err) => this.router.navigate(['projects/' + id + '/connections/new']));
+    this.projectService.getJenkinsHasPipeline(id).subscribe(
+      response => {
+        response.isCreated
+          ? this.router.navigate(['projects/' + id + '/jenkins/status'])
+          : this.router.navigate(['projects/' + id + '/connections/new']);
+      },
+      err => this.router.navigate(['projects/' + id + '/connections/new'])
+    );
+  }
+
+  signout() {
+    this.authService.logout();
   }
 }

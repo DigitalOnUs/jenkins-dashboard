@@ -14,7 +14,7 @@ export class AuthService {
     this.afAuth.authState.subscribe(data => {
       this.user = data;
       this.isLoading = false;
-      console.log(this.user);
+      console.log('User Logged');
     });
   }
   get authenticated() {
@@ -36,5 +36,6 @@ export class AuthService {
 
   logout() {
     this.afAuth.auth.signOut();
+    this.router.navigate(['/login']);
   }
 }
