@@ -2,7 +2,7 @@
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
-import { MatStepperModule, MatStepperIntl } from "@angular/material";
+import { MatStepperModule, MatStepperIntl, MatButtonModule } from "@angular/material";
 import { LoginViewComponent } from "./login.component";
 
 
@@ -12,6 +12,7 @@ import { LoginViewComponent } from "./login.component";
     ReactiveFormsModule,
     CommonModule,
     FormsModule,
+    MatButtonModule
   ],
   declarations: [LoginViewComponent],
   exports: [LoginViewComponent],

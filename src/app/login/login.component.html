@@ -2,7 +2,7 @@
     <div class="materialContainer">
         <form [formGroup]="formLogin">
             <div class="box">
-                <div class="title">LOGIN</div>
+                <div class="title"><img src="../../assets/img/20170704001638_logo_dou.png" style="width: 300px"></div>
                 <div class="input">
                     <label for="name">Email</label>
                     <input type="text" name="name" id="name" formControlName="email">
@@ -13,12 +13,10 @@
                     <input type="password" name="pass" id="pass" formControlName="password">
                     <span class="spin"></span>
                 </div>
-                <div class="button login" >
-                    <button (click)="login()">
-                        <span>LOGIN</span>
-                        <i class="fa fa-check"></i>
-                    </button>
-                </div>
+                <button (click)="login()" class="btn btn-info btn-block btn-large"><strong>Login</strong></button>
+                <br>
+                <br>
+                <br>
                 <a href="" class="pass-forgot">Forgot your password?</a>
             </div>
         </form>

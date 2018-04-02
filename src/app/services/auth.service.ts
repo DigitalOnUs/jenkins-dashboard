@@ -1,55 +1,40 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject, BehaviorSubject } from 'rxjs/Rx';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AuthInfo } from './auth-info';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
-
+import { User } from '@firebase/auth-types';
+import { toast } from "angular2-materialize";
 @Injectable()
 export class AuthService {
-  static UNKNOWN_USER = new AuthInfo(null);
+  isLoading: boolean;
+  user: User;
+  constructor(public afAuth: AngularFireAuth, private router: Router) {
+    this.isLoading = true;
+    this.afAuth.authState.subscribe(data => {
+      this.user = data;
+      this.isLoading = false;
+      console.log(this.user);
+    });
+  }
+  get authenticated() {
+    return this.user;
+  }
 
-  authInfo$: BehaviorSubject<AuthInfo> = new BehaviorSubject<AuthInfo>(
-    AuthService.UNKNOWN_USER
-  );
-
-  constructor(private afAuth: AngularFireAuth, private router: Router) {}
-
-  login(email, password): Observable<AuthInfo> {
-    return this.fromFirebaseAuthPromise(
-      this.afAuth.auth.signInWithEmailAndPassword(email, password)
-    );
+  login(email, password) {
+    this.afAuth.auth
+      .signInWithEmailAndPassword(email, password)
+      .then(() => this.router.navigate(['/']))
+      .catch(err => {
+        toast(err.message, 3000, "rounded");
+      });
   }
 
   signUp(email, password) {
-    return this.fromFirebaseAuthPromise(
-      this.afAuth.auth.createUserWithEmailAndPassword(email, password)
-    );
-  }
-
-  fromFirebaseAuthPromise(promise): Observable<any> {
-    const subject = new Subject<any>();
-
-    promise.then(
-      res => {
-        const authInfo = new AuthInfo(this.afAuth.auth.currentUser.uid);
-        this.authInfo$.next(authInfo);
-        subject.next(res);
-        subject.complete();
-      },
-      err => {
-        this.authInfo$.error(err);
-        subject.error(err);
-        subject.complete();
-      }
-    );
-
-    return subject.asObservable();
+    this.afAuth.auth.createUserWithEmailAndPassword(email, password);
   }
 
   logout() {
     this.afAuth.auth.signOut();
-    this.authInfo$.next(AuthService.UNKNOWN_USER);
-    this.router.navigate(['/login']);
   }
 }
