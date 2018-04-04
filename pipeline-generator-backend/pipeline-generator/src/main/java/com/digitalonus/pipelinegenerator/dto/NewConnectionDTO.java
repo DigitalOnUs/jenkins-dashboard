@@ -1,54 +1,38 @@
 package com.digitalonus.pipelinegenerator.dto;
 
+import java.util.List;
 import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
-
 import com.digitalonus.pipelinegenerator.commons.GsonSingleton;
 
 public class NewConnectionDTO {
-	@NotNull
-	@NotEmpty
-	@NotBlank
-	private String provider;
 
 	@NotNull
 	@NotEmpty
-	@NotBlank
-	private String accessKey;
-
+	private List<InstanceServiceDTO> services;
+	
 	@NotNull
-	@NotEmpty
-	@NotBlank
-	private String secretKey;
+	private ProviderCredentialsDTO credentials;
 
-	public String getProvider() {
-		return provider;
+	public ProviderCredentialsDTO getCredentials() {
+		return credentials;
 	}
 
-	public void setProvider(String provider) {
-		this.provider = provider;
+	public void setCredentials(ProviderCredentialsDTO credentials) {
+		this.credentials = credentials;
 	}
 
-	public String getAccessKey() {
-		return accessKey;
+	public List<InstanceServiceDTO> getServices() {
+		return services;
 	}
 
-	public void setAccessKey(String accessKey) {
-		this.accessKey = accessKey;
-	}
-
-	public String getSecretKey() {
-		return secretKey;
-	}
-
-	public void setSecretKey(String secretKey) {
-		this.secretKey = secretKey;
+	public void setServices(List<InstanceServiceDTO> services) {
+		this.services = services;
 	}
 
 	@Override
 	public String toString() {
 		return new GsonSingleton().getInstance().toJson(this);
 	}
+
 }
