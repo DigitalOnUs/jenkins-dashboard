@@ -4,6 +4,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { toast } from 'angular2-materialize';
+
 declare const $: any;
 
 @Component({
@@ -177,7 +179,9 @@ export class LoginViewComponent implements OnInit {
   }
   register() {
     const val = this.formLoginRegister.value;
-    this.authService.signUp(val.email, val.password);
+    this.isPasswordMatch()
+      ? this.authService.signUp(val.email, val.password)
+      : toast('Password doesnot match', 3000, 'rounded');
   }
 
   login() {

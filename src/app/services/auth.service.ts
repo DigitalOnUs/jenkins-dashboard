@@ -4,7 +4,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
 import { User } from '@firebase/auth-types';
-import { toast } from "angular2-materialize";
+import { toast } from 'angular2-materialize';
 @Injectable()
 export class AuthService {
   isLoading: boolean;
@@ -26,12 +26,17 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then(() => this.router.navigate(['/']))
       .catch(err => {
-        toast(err.message, 3000, "rounded");
+        toast(err.message, 3000, 'rounded');
       });
   }
 
   signUp(email, password) {
-    this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+    this.afAuth.auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => this.router.navigate(['/login']))
+      .catch(err => {
+        toast(err.message, 3000, 'rounded');
+      });
   }
 
   logout() {

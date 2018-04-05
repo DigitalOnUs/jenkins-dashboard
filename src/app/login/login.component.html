@@ -2,7 +2,9 @@
     <div class="materialContainer">
         <form [formGroup]="formLogin">
             <div class="box">
-                <div class="title"><img src="../../assets/img/20170704001638_logo_dou.png" style="width: 300px"></div>
+                <div class="title">
+                    <img src="../../assets/img/20170704001638_logo_dou.png" style="width: 300px">
+                </div>
                 <div class="input">
                     <label for="name">Email</label>
                     <input type="text" name="name" id="name" formControlName="email">
@@ -13,7 +15,9 @@
                     <input type="password" name="pass" id="pass" formControlName="password">
                     <span class="spin"></span>
                 </div>
-                <button (click)="login()" class="btn btn-info btn-block btn-large"><strong>Login</strong></button>
+                <button (click)="login()" class="btn btn-info btn-block btn-large">
+                    <strong>Login</strong>
+                </button>
                 <br>
                 <br>
                 <br>
@@ -48,10 +52,9 @@
                     <input type="password" name="reregpass" id="reregpass" formControlName="confirm">
                     <span class="spin"></span>
                 </div>
-
                 <div class="button">
-                    <button (click)="register()" [disabled]="!isPasswordMatch()">
-                        <span>REGISTER</span>
+                    <button (click)="register()">
+                      Register
                     </button>
                 </div>
             </form>
