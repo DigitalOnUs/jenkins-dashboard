@@ -1,0 +1,23 @@
+<mat-card>
+    <mat-card-title>
+        Preview
+    </mat-card-title>
+    <mat-card-content>
+        <mat-card-subtitle>
+            Provider Setup
+        </mat-card-subtitle>
+        <p>Provider: {{providerValues.provider.viewValue}}</p>
+        <p>Access Key: {{providerValues.accessKey}}</p>
+        <p>Secret Key: {{providerValues.secretKey}}</p>
+        <br>
+        <mat-card-subtitle>
+            Services
+        </mat-card-subtitle>
+        <p *ngIf="filtered.length; else noServices">{{filtered}}</p>
+        <ng-template #noServices>
+            <p>
+                No services selected
+            </p>
+        </ng-template>
+    </mat-card-content>
+</mat-card>

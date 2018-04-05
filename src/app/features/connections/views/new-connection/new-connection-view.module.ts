@@ -12,9 +12,13 @@ import {
   MatSelectModule,
   MatCheckboxModule,
   MatSlideToggleModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatRadioModule,
+  MatIconModule,
+  MatCardModule
 } from '@angular/material';
 import { AppComponent } from '../../../../app.component';
+import { NewConnectionPreviewComponent } from './new-connection-preview.component';
 
 @NgModule({
   imports: [
@@ -28,10 +32,13 @@ import { AppComponent } from '../../../../app.component';
     MatSelectModule,
     MatCheckboxModule,
     MatSlideToggleModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatRadioModule,
+    MatIconModule,
+    MatCardModule
   ],
-  declarations: [NewConnectionViewComponent],
-  exports: [NewConnectionViewComponent],
+  declarations: [NewConnectionViewComponent,NewConnectionPreviewComponent],
+  exports: [NewConnectionViewComponent,NewConnectionPreviewComponent],
   providers: [StepsService, MatStepperIntl]
 })
 export class NewConnectionViewModule {}

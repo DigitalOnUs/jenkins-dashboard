@@ -51,7 +51,6 @@ export class ProjectsViewComponent implements OnInit {
     this.projectService
       .createProject(Object.assign({}, this.form.value))
       .subscribe(project => this.projects.push(project));
-    console.log(this.projects);
     this.form.reset();
   }
 

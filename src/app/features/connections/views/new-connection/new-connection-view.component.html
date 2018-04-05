@@ -4,14 +4,14 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header" data-background-color="blue">
-            <h4 class="title">Provider Configuration</h4>
+            <h4 class="title">Setup Provider</h4>
           </div>
           <div class="card-content">
             <div class="row">
-              <mat-vertical-stepper [linear]="isLinear" #stepper="matVerticalStepper">
-                <mat-step [stepControl]="firstFormGroup">
+              <mat-vertical-stepper [linear]="true" #stepper="matVerticalStepper">
+                <mat-step [editable]="false" [stepControl]="firstFormGroup">
                   <form [formGroup]="firstFormGroup">
-                    <ng-template matStepLabel>Provider</ng-template>
+                    <ng-template matStepLabel>Setup Provider</ng-template>
                     <div class="row">
                       <mat-form-field>
                         <mat-select formControlName="provider" placeholder="Provider" required>
@@ -36,25 +36,22 @@
                     <button [disabled]="firstFormGroup.invalid" class="btn btn-primary" mat-button matStepperNext>Next</button>
                   </form>
                 </mat-step>
-                <mat-step [stepControl]="secondFormGroup">
+                <mat-step [editable]="false" [stepControl]="secondFormGroup">
                   <form [formGroup]="secondFormGroup">
-                    <ng-template matStepLabel>Images</ng-template>
+                    <ng-template matStepLabel>Create Images</ng-template>
                     <div class="row">
-                      <mat-slide-toggle formControlName="jenkins">Jenkins Slave</mat-slide-toggle>
+                      <mat-slide-toggle formControlName="Jenkins">Jenkins</mat-slide-toggle>
                     </div>
                     <div class="row">
-                      <mat-slide-toggle formControlName="azure">Azure</mat-slide-toggle>
+                      <mat-slide-toggle formControlName="Azure">Azure</mat-slide-toggle>
                     </div>
                     <div class="row">
-                      <mat-slide-toggle formControlName="gerrit">Gerrit</mat-slide-toggle>
+                      <mat-slide-toggle formControlName="Gerrit">Gerrit</mat-slide-toggle>
                     </div>
                     <div class="row">
-                      <mat-slide-toggle formControlName="nexus">Nexus</mat-slide-toggle>
+                      <mat-slide-toggle formControlName="Nexus">Nexus</mat-slide-toggle>
                     </div>
                     <div>
-                      <div class="row">
-                        <button class="btn btn-warning" mat-button matStepperPrevious>Back</button>
-                      </div>
                       <div class="row">
                         <button [disabled]="secondFormGroup.invalid" class="btn btn-primary" mat-button matStepperNext>Next</button>
                       </div>
@@ -62,11 +59,21 @@
                   </form>
                 </mat-step>
                 <mat-step>
-                  <ng-template matStepLabel>Done</ng-template>
-                  <br>
-                  <div class="row" *ngIf="!saving">
-                      <span class="alert alert-primary">You're ready to save changes</span>
+                  <ng-template matStepLabel>Save</ng-template>
+                  <div class="row">
+                    <div class="switch">
+                      <label>
+                        Preview Off
+                        <input type="checkbox" [(ngModel)]="showPreview">
+                        <span class="lever"></span>
+                        Preview On
+                      </label>
+                    </div>
                   </div>
+                  <div *ngIf="showPreview" class="row">
+                    <app-new-connection-preview [providerValues]="firstFormGroup.value" [servicesValues]="secondFormGroup.value"></app-new-connection-preview>
+                  </div>
+                  <br>
                   <div class="row" *ngIf="savingCorrect">
                       <span class="alert alert-success"> Good! You're done</span>
                   </div>
@@ -76,10 +83,8 @@
                   <div class="row">
                       <mat-progress-bar *ngIf="loading" mode="buffer"></mat-progress-bar>
                   </div>
-                  
                   <div>
-                      <button class="btn btn-danger" mat-button (click)="stepper.reset();">Reset</button>
-                      <button (click)="save()" class="btn btn-success" mat-button>Create</button>
+                      <button (click)="save()" class="btn btn-success" mat-button>Save</button>
                   </div>
                 </mat-step>
               </mat-vertical-stepper>

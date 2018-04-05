@@ -9,7 +9,6 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './new-connection-view.component.html'
 })
 export class NewConnectionViewComponent implements OnInit {
-  isLinear = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   idProject: any;
@@ -17,6 +16,8 @@ export class NewConnectionViewComponent implements OnInit {
   savingCorrect: boolean;
   errorSaving: boolean;
   loading: boolean;
+  showPreview: boolean;
+  preview: any;
   providers = [
     { value: 'aws', viewValue: 'Amazon Web Services' },
     { value: 'gcp', viewValue: 'Google Cloud Platform' },
@@ -40,32 +41,32 @@ export class NewConnectionViewComponent implements OnInit {
       secretKey: ['', Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
-      jenkins: [false],
-      azure: [false],
-      gerrit: [false],
-      nexus: [false]
+      Jenkins: [false],
+      Azure: [false],
+      Gerrit: [false],
+      Nexus: [false]
     });
   }
 
   save() {
     this.saving = true;
     this.loading = true;
+    this.errorSaving = false;
     const obj = {
       credentials: this.firstFormGroup.value,
       services: this.secondFormGroup.value
     };
-    console.log(obj);
     this.stepService
       .createConnectionAndProviders(this.idProject, obj)
       .subscribe(data => {
         this.savingCorrect = true;
         this.loading = false;
-        console.log(data);
-      }, err => (this.errorSaving = true, this.loading = false));
+        this.errorSaving = false;
+      }, err => ((this.errorSaving = true), (this.loading = false)));
   }
-  resetVariables(){
+  resetVariables() {
     this.saving = false;
-  this.savingCorrect = false;
-  this.errorSaving = false
+    this.savingCorrect = false;
+    this.errorSaving = false;
   }
 }
