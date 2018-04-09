@@ -20,14 +20,14 @@ import com.digitalonus.pipelinegenerator.vo.NewConnectionVO;
 
 @RestController
 @CrossOrigin
-@RequestMapping("connection")
+@RequestMapping("provider")
 public class ConnectionControllerImpl implements ConnectionController{
 
 	@Override
-	@PostMapping("/{projectId}/create")
+	@PostMapping("/{projectId}/create-services-provider")
 	public void createConnection(@PathVariable("projectId")String projectId, 
 			@RequestBody NewConnectionVO connectionVO, 
-			BindingResult bindingResult) {
+			BindingResult bindingResult) throws InterruptedException{
 		
 		logger.info("CTRL: Starting createConnection method...");
 		
