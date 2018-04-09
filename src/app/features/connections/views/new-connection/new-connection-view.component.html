@@ -14,8 +14,8 @@
                     <ng-template matStepLabel>Setup Provider</ng-template>
                     <div class="row">
                       <mat-form-field>
-                        <mat-select formControlName="provider" placeholder="Provider" required>
-                          <mat-option disabled>Choose a provider</mat-option>
+                        <mat-select formControlName="provider" placeholder="Provisioners" required>
+                          <mat-option disabled>Choose one</mat-option>
                           <mat-option *ngFor="let provider of providers" [value]="provider">
                             {{ provider.viewValue }}
                           </mat-option>
@@ -38,7 +38,7 @@
                 </mat-step>
                 <mat-step [editable]="false" [stepControl]="secondFormGroup">
                   <form [formGroup]="secondFormGroup">
-                    <ng-template matStepLabel>Create Images</ng-template>
+                    <ng-template matStepLabel>Services</ng-template>
                     <div class="row">
                       <mat-slide-toggle formControlName="Jenkins">Jenkins</mat-slide-toggle>
                     </div>
