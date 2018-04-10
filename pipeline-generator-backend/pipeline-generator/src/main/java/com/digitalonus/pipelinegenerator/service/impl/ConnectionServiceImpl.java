@@ -42,11 +42,11 @@ public class ConnectionServiceImpl implements ConnectionService {
 					switch (service.getName()) {
 					case "Jenkins":
 						services.add(
-								"\"wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo\"");
-						services.add("\"rpm --import http://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key\"");
-						services.add("\"yum install jenkins\"");
-						services.add("\"service jenkins start\"");
-						services.add("\"chkconfig jenkins on\"");
+								"\"wget https://raw.githubusercontent.com/laardee/jenkins-installation/master/install.sh && sudo chmod 755 install.sh && sudo ./install.sh\"");
+						services.add("\"sleep 3m\"");
+						services.add("\"sudo chmod 777 /var/lib/jenkins/secrets\"");
+						services.add("\"sudo chmod 777 /var/lib/jenkins/secrets/*\"");
+						services.add("\"cat /var/lib/jenkins/secrets/initialAdminPassword\"");
 						break;
 					case "Gerrit":
 						services.add("\"wget https://gerrit-releases.storage.googleapis.com/gerrit-2.12.2.war\"");
@@ -72,7 +72,7 @@ public class ConnectionServiceImpl implements ConnectionService {
 					.replace("var.SECRET_KEY", connectionDTO.getCredentials().getSecretKey())
 					.replace("var.INSTANCE_NAME", projectName + "_instance")
 					.replace("var.PATH_TO_PUBLIC_KEY", projectName + "_key.pub")
-					.replace("var.INSTANCE_NAME", projectName + "_instance").replace("var.INSTANCE_USERNAME", "ubuntu")
+					.replace("var.INSTANCE_NAME", projectName + "_instance").replace("var.INSTANCE_USERNAME", "ec2-user")
 					.replace("var.PATH_TO_PRIVATE_KEY", projectName + "_key");
 			Files.write(
 					Paths.get(instancePath.getParent().getParent().toString() + File.separator + projectName + ".tf"),
