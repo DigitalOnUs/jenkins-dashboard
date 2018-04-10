@@ -25,7 +25,7 @@ import com.digitalonus.pipelinegenerator.service.ProjectService;
 public class ConnectionServiceImpl implements ConnectionService {
 
 	@Override
-	public void createConnection(NewConnectionDTO connectionDTO, String projectId)
+	public String createConnection(NewConnectionDTO connectionDTO, String projectId)
 			throws IOException, InterruptedException {
 		logger.info("SERVICE: Starting createConnection method...");
 		if (connectionDTO == null)
@@ -33,70 +33,76 @@ public class ConnectionServiceImpl implements ConnectionService {
 
 		ProjectDTO dto = this.projectService.getProjectInfoWithId(projectId);
 		System.out.println(System.getProperty("user.dir") + File.separator + "resources");
-
+		String instanceIp = "";
 		if (dto != null) {
-			List<String> services = new ArrayList<>();
-
-			connectionDTO.getServices().forEach(service -> {
-				if (service != null && service.getEnabled()) {
-					switch (service.getName()) {
-					case "Jenkins":
-						services.add(
-								"\"wget https://raw.githubusercontent.com/laardee/jenkins-installation/master/install.sh && sudo chmod 755 install.sh && sudo ./install.sh\"");
-						services.add("\"sleep 3m\"");
-						services.add("\"sudo chmod 777 /var/lib/jenkins/secrets\"");
-						services.add("\"sudo chmod 777 /var/lib/jenkins/secrets/*\"");
-						services.add("\"cat /var/lib/jenkins/secrets/initialAdminPassword\"");
-						break;
-					case "Gerrit":
-						services.add("\"wget https://gerrit-releases.storage.googleapis.com/gerrit-2.12.2.war\"");
-						services.add(
-								"\"java -jar gerrit-2.12.2.war init --batch -d ~/gerrit_test --install-plugin download-commands\"");
+			try {
+				List<String> services = new ArrayList<>();
+	
+				connectionDTO.getServices().forEach(service -> {
+					if (service != null && service.getEnabled()) {
+						switch (service.getName()) {
+						case "Jenkins":
+							services.add(
+									"\"wget https://raw.githubusercontent.com/laardee/jenkins-installation/master/install.sh && sudo chmod 755 install.sh && sudo ./install.sh\"");
+							services.add("\"sleep 3m\"");
+							services.add("\"sudo chmod 777 /var/lib/jenkins/secrets\"");
+							services.add("\"sudo chmod 777 /var/lib/jenkins/secrets/*\"");
+							services.add("\"cat /var/lib/jenkins/secrets/initialAdminPassword\"");
+							break;
+						case "Gerrit":
+							services.add("\"wget https://gerrit-releases.storage.googleapis.com/gerrit-2.12.2.war\"");
+							services.add(
+									"\"java -jar gerrit-2.12.2.war init --batch -d ~/gerrit_test --install-plugin download-commands\"");
+						}
 					}
-				}
-			});
-			String inline = "";
-			if(services.isEmpty())
-				inline = "\"dir\"";
-			else 
-				inline = String.join(",", services);
-			
-			String projectName = dto.getId().toHexString();
-			String resourcesPath = System.getProperty("user.dir") + File.separator + "resources";
-			Charset charset = StandardCharsets.UTF_8;
-			Path instancePath = Paths.get(resourcesPath + File.separator + "instance.tf");
-			String content = new String(Files.readAllBytes(instancePath), charset);
-			String finalContent = content.replace("var.KEY_PAIR_NAME", projectName + "_key")
-					.replace("var.SERVICES", inline)
-					.replace("var.ACCESS_KEY", connectionDTO.getCredentials().getAccessKey())
-					.replace("var.SECRET_KEY", connectionDTO.getCredentials().getSecretKey())
-					.replace("var.INSTANCE_NAME", projectName + "_instance")
-					.replace("var.PATH_TO_PUBLIC_KEY", projectName + "_key.pub")
-					.replace("var.INSTANCE_NAME", projectName + "_instance").replace("var.INSTANCE_USERNAME", "ec2-user")
-					.replace("var.PATH_TO_PRIVATE_KEY", projectName + "_key");
-			Files.write(
-					Paths.get(instancePath.getParent().getParent().toString() + File.separator + projectName + ".tf"),
-					finalContent.getBytes(charset));
-			 String command = "sudo cp resources/execute.bash " + projectName + ".bash && sudo chmod 777 " + projectName
-			 + ".bash && ssh-keygen -f " + projectName + "_key -q -N \"\" && ./" +
-			 projectName + ".bash ";
-			 String[] parameters = new String[3];
-			 System.out.println(command);
-			 parameters[0] = "/bin/bash";
-			 parameters[1] = "-c";
-			 parameters[2] = command;
-			 Process p = Runtime.getRuntime().exec(parameters);
-			 BufferedReader reader = new BufferedReader(new
-			 InputStreamReader(p.getInputStream()));
-			 String line = reader.readLine();
-			 while (line != null) {
-			 System.out.println(line);
-			 line = reader.readLine();
-			 }
-			 p.waitFor();
-			 p.destroy();
+				});
+				String inline = "";
+				if(services.isEmpty())
+					inline = "\"dir\"";
+				else 
+					inline = String.join(",", services);
+				
+				String projectName = dto.getId().toHexString();
+				String resourcesPath = System.getProperty("user.dir") + File.separator + "resources";
+				Charset charset = StandardCharsets.UTF_8;
+				Path instancePath = Paths.get(resourcesPath + File.separator + "instance.tf");
+				String content = new String(Files.readAllBytes(instancePath), charset);
+				String finalContent = content.replace("var.KEY_PAIR_NAME", projectName + "_key")
+						.replace("var.SERVICES", inline)
+						.replace("var.ACCESS_KEY", connectionDTO.getCredentials().getAccessKey())
+						.replace("var.SECRET_KEY", connectionDTO.getCredentials().getSecretKey())
+						.replace("var.INSTANCE_NAME", projectName + "_instance")
+						.replace("var.PATH_TO_PUBLIC_KEY", projectName + "_key.pub")
+						.replace("var.INSTANCE_NAME", projectName + "_instance").replace("var.INSTANCE_USERNAME", "ec2-user")
+						.replace("var.PATH_TO_PRIVATE_KEY", projectName + "_key");
+				Files.write(
+						Paths.get(instancePath.getParent().getParent().toString() + File.separator + projectName + ".tf"),
+						finalContent.getBytes(charset));
+				 String command = "sudo cp resources/execute.bash " + projectName + ".bash && sudo chmod 777 " + projectName
+				 + ".bash && ssh-keygen -f " + projectName + "_key -q -N \"\" && ./" +
+				 projectName + ".bash ";
+				 String[] parameters = new String[3];
+				 System.out.println(command);
+				 parameters[0] = "/bin/bash";
+				 parameters[1] = "-c";
+				 parameters[2] = command;
+				 Process p = Runtime.getRuntime().exec(parameters);
+				 BufferedReader reader = new BufferedReader(new
+				 InputStreamReader(p.getInputStream()));
+				 String line = reader.readLine();
+				 while (line != null) {
+				 System.out.println(line);
+				 line = reader.readLine();
+				 }
+				 p.waitFor();
+				 p.destroy();
+				 Path ipFilePath = Paths.get(projectName + "_instance.txt");
+				 instanceIp = new String(Files.readAllBytes(ipFilePath), charset);
+			} catch (Exception e) {
+				logger.warn(e.getMessage());
+			}
 		}
-
+		return instanceIp;
 	}
 
 	private static final Logger logger = Logger.getLogger(ConnectionServiceImpl.class);

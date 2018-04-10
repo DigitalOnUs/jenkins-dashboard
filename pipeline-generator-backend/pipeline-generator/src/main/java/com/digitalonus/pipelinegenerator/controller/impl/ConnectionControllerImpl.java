@@ -25,7 +25,7 @@ public class ConnectionControllerImpl implements ConnectionController{
 
 	@Override
 	@PostMapping("/{projectId}/create-services-provider")
-	public void createConnection(@PathVariable("projectId")String projectId, 
+	public String createConnection(@PathVariable("projectId")String projectId, 
 			@RequestBody NewConnectionVO connectionVO, 
 			BindingResult bindingResult) throws InterruptedException{
 		
@@ -39,12 +39,14 @@ public class ConnectionControllerImpl implements ConnectionController{
 		
 		NewConnectionDTO connectionDTO = 
 				this.connectionParser.parseToDTO(connectionVO);
-		
+		String instanceIp = "";
 		try {
-			this.connectionService.createConnection(connectionDTO, projectId);
+			instanceIp = this.connectionService.createConnection(connectionDTO, projectId);
 		} catch (IOException e) {
 			throw new RuntimeException(e.getMessage());
 		}
+		
+		return instanceIp;
 		
 	}
 	

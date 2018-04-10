@@ -6,5 +6,5 @@ import com.digitalonus.pipelinegenerator.dto.NewConnectionDTO;
 import com.digitalonus.pipelinegenerator.vo.NewConnectionVO;
 
 public interface ConnectionService {
-	void createConnection(NewConnectionDTO connectionDTO, String projectId) throws IOException, InterruptedException;
+	String createConnection(NewConnectionDTO connectionDTO, String projectId) throws IOException, InterruptedException;
 }
