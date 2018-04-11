@@ -16,7 +16,7 @@ const httpOptions = {
 export class StepsService {
   private url;
   constructor(private http: Http, private httpClient: HttpClient) {
-    this.url = 'http://d041b932.ngrok.io';
+    this.url = 'http://54.193.81.209:8080';
   }
 
   getListAllSteps(id: string) {

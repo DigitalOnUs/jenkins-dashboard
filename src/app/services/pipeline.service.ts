@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 export class PipelineService {
   private url;
   constructor(private http: Http) {
-    this.url = 'http://54.183.152.125:8080';
+    this.url = 'http://54.193.81.209:8080';
   }
 
   getPipelineStepsWithId(id: string) {

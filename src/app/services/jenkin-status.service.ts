@@ -9,7 +9,7 @@ export class JenkinStatusService {
   url: string;
 
   constructor(private http: Http) {
-    this.url = 'http://4325149a.ngrok.io';
+    this.url = 'http://54.193.81.209:8080';
   }
 
   getJenkinStatus(idProject: any) {

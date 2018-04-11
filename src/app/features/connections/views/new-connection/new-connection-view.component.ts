@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { toast } from 'angular2-materialize';
 import { StepsService } from '../../../../services/steps.service';
 import { ActivatedRoute } from '@angular/router';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-new-connection',
@@ -52,21 +53,72 @@ export class NewConnectionViewComponent implements OnInit {
     this.saving = true;
     this.loading = true;
     this.errorSaving = false;
+    const services = [];
+    _.mapObject(this.secondFormGroup.value, (value, key) => {
+      switch (key) {
+        case 'Jenkins':
+          {
+            if (value) {
+              let service = {
+                name: key,
+                enabled: value
+              };
+              services.push(service);
+            }
+          }
+          break;
+        case 'Azure':
+          {
+            if (value) {
+              let service = {
+                name: key,
+                enabled: value
+              };
+              services.push(service);
+            }
+          }
+          break;
+
+        case 'Gerrit':
+          {
+            if (value) {
+              let service = {
+                name: key,
+                enabled: value
+              };
+              services.push(service);
+            }
+          }
+          break;
+
+        case 'Nexus':
+          {
+            if (value) {
+              let service = {
+                name: key,
+                enabled: value
+              };
+              services.push(service);
+            }
+          }
+          break;
+        default:
+          break;
+      }
+    });
     const obj = {
       credentials: this.firstFormGroup.value,
-      services: this.secondFormGroup.value
+      services: services
     };
+    console.log(obj);
     this.stepService
       .createConnectionAndProviders(this.idProject, obj)
       .subscribe(data => {
         this.savingCorrect = true;
         this.loading = false;
         this.errorSaving = false;
-      }, err => ((this.errorSaving = true), (this.loading = false)));
-  }
-  resetVariables() {
-    this.saving = false;
-    this.savingCorrect = false;
-    this.errorSaving = false;
+        toast('Success', 3000, 'rounded');
+      }, err => (toast(err.message, 3000, 'rounded'),
+      (this.loading = false), (this.errorSaving = true)));
   }
 }
