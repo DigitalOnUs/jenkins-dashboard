@@ -23,6 +23,10 @@ export const ROUTES: Routes = [
         path: 'jenkins',
         loadChildren:
         '../../features/jenkins-status/jenkins-status-view.routing#JenkinsStatusRouting'
+      }, {
+        path: 'profile',
+        loadChildren:
+        '../../features/profile/profile.routing#ProfileRouting'
       }
     ]
   }
