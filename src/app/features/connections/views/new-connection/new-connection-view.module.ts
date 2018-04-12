@@ -15,7 +15,8 @@ import {
   MatProgressBarModule,
   MatRadioModule,
   MatIconModule,
-  MatCardModule
+  MatCardModule,
+  MatDividerModule
 } from '@angular/material';
 import { AppComponent } from '../../../../app.component';
 import { NewConnectionPreviewComponent } from './new-connection-preview.component';
@@ -35,10 +36,11 @@ import { NewConnectionPreviewComponent } from './new-connection-preview.componen
     MatProgressBarModule,
     MatRadioModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatDividerModule
   ],
-  declarations: [NewConnectionViewComponent,NewConnectionPreviewComponent],
-  exports: [NewConnectionViewComponent,NewConnectionPreviewComponent],
+  declarations: [NewConnectionViewComponent, NewConnectionPreviewComponent],
+  exports: [NewConnectionViewComponent, NewConnectionPreviewComponent],
   providers: [StepsService, MatStepperIntl]
 })
 export class NewConnectionViewModule {}
