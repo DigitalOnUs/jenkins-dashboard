@@ -8,6 +8,7 @@ import * as _ from 'underscore';
 export class NewConnectionPreviewComponent implements OnInit {
     @Input() providerValues: any;
     @Input() servicesValues: any;
+    @Input() testingValues: any;
     keys: any
     filtered: any;
     ngOnInit(): void {

@@ -12,6 +12,7 @@ import * as _ from 'underscore';
 export class NewConnectionViewComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  testingFormGroup: FormGroup;
   idProject: any;
   saving: boolean;
   savingCorrect: boolean;
@@ -23,6 +24,20 @@ export class NewConnectionViewComponent implements OnInit {
     { value: 'aws', viewValue: 'Amazon Web Services' },
     { value: 'gcp', viewValue: 'Google Cloud Platform' },
     { value: 'ms', viewValue: 'Microsoft Azure' }
+  ];
+  servers = [
+    {value: 'sln', viewValue: 'Selenium'},
+    {value: 'njs', viewValue: 'NodeJS'}
+  ];
+  frameworks = [
+    {value: 'cbr', viewValue: 'Cucumber'},
+    {value: 'jzm', viewValue: 'Jazmine'},
+    {value: 'mch', viewValue: 'Moncha'},
+    {value: 'ptc', viewValue: 'Protractor'}
+  ];
+  webdrivers = [
+    {value: 'wjs', viewValue: 'WebdriverJS'},
+    {value: 'cdr', viewValue: 'ChromeDriver'},
   ];
   constructor(
     private _formBuilder: FormBuilder,
@@ -46,6 +61,13 @@ export class NewConnectionViewComponent implements OnInit {
       Azure: [false],
       Gerrit: [false],
       Nexus: [false]
+    });
+    this.testingFormGroup = this._formBuilder.group({
+      Server: [''],
+      Framework: [''],
+      WebDriver: [''],
+      ServerInfo: [],
+      PortInfo: []
     });
   }
 

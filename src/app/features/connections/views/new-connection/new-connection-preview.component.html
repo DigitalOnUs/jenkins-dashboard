@@ -4,14 +4,17 @@
     </mat-card-title>
     <mat-card-content>
         <mat-card-subtitle>
-            Provider Setup
+            <span class="blue-text text-darken-2">Provider Setup</span>
         </mat-card-subtitle>
-        <p>Provider: {{providerValues.provider.viewValue}}</p>
-        <p>Access Key: {{providerValues.accessKey}}</p>
-        <p>Secret Key: {{providerValues.secretKey}}</p>
-        <br>
+        <p>
+            <strong>Provider: </strong> {{providerValues.provider.viewValue}}</p>
+        <p>
+            <strong>Access Key: </strong> {{providerValues.accessKey}}</p>
+        <p>
+            <strong>Secret Key: </strong> {{providerValues.secretKey}}</p>
+        <hr>
         <mat-card-subtitle>
-            Services
+            <span class="blue-text text-darken-2"> Services</span>
         </mat-card-subtitle>
         <p *ngIf="filtered.length; else noServices">{{filtered}}</p>
         <ng-template #noServices>
@@ -19,5 +22,19 @@
                 No services selected
             </p>
         </ng-template>
+        <hr>
+        <mat-card-subtitle>
+            <span class="blue-text text-darken-2"> Testing Setup</span>
+        </mat-card-subtitle>
+        <p>
+            <strong>Server: </strong>{{testingValues.Server.viewValue}}</p>
+        <p>
+            <strong>Framework: </strong> {{testingValues.Framework.viewValue}}</p>
+        <p>
+            <strong> WebDriver: </strong> {{testingValues.WebDriver.viewValue}}</p>
+        <p>
+            <Strong>IP: </Strong> {{testingValues.ServerInfo}}</p>
+        <p>
+            <strong>Port: </strong>{{testingValues.PortInfo}}</p>
     </mat-card-content>
 </mat-card>
