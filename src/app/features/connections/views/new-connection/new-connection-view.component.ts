@@ -20,6 +20,8 @@ export class NewConnectionViewComponent implements OnInit {
   loading: boolean;
   showPreview: boolean;
   preview: any;
+  instanceIp: any;
+  initialAdminPassword: any;
   providers = [
     { value: 'aws', viewValue: 'Amazon Web Services' },
     { value: 'gcp', viewValue: 'Google Cloud Platform' },
@@ -47,9 +49,6 @@ export class NewConnectionViewComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.parent.parent.params.subscribe(params => {
       this.idProject = params.id;
-      this.stepService
-        .getProviderConfiguration(params.id)
-        .subscribe(data => this.firstFormGroup.patchValue(data));
     });
     this.firstFormGroup = this._formBuilder.group({
       provider: ['', Validators.required],
@@ -132,10 +131,11 @@ export class NewConnectionViewComponent implements OnInit {
       credentials: this.firstFormGroup.value,
       services: services
     };
-    console.log(obj);
     this.stepService
       .createConnectionAndProviders(this.idProject, obj)
       .subscribe(data => {
+        this.instanceIp = data.instanceIp
+        this.initialAdminPassword = data.initialAdminPassword
         this.savingCorrect = true;
         this.loading = false;
         this.errorSaving = false;

@@ -59,7 +59,7 @@ export class ProjectsViewComponent implements OnInit {
       response => {
         response.isCreated
           ? this.router.navigate(['projects/' + id + '/jenkins/status'])
-          : this.router.navigate(['projects/' + id + '/connections/new']);
+          : this.router.navigate(['projects/' + id + '/pipeline/generator']);
       },
       err => this.router.navigate(['projects/' + id + '/connections/new'])
     );

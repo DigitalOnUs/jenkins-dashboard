@@ -28,7 +28,7 @@ export class ProjectService {
 
   getJenkinsHasPipeline(proyectId: any) {
     return this.http
-      .get(this.url + proyectId + '/pipeline-created')
+      .get(this.url + '/' + proyectId + '/pipeline-created')
       .map((projects: Response) => projects.json());
   }
 

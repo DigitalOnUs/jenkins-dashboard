@@ -128,8 +128,17 @@
                   </div>
                   <br>
                   <div class="row" *ngIf="errorSaving">
-                      <span class="alert alert-danger"> Oops! Try again</span>
+                      <div class="alert alert-danger">
+                        <span><strong>Oops!&nbsp;</strong>Try again</span></div>
                   </div>
+                  <div class="row" *ngIf="savingCorrect">
+                    <div class="alert alert-primary">
+                      <span>Need one more step, you need to go to ip and configure jenkins then you'll can create a pipeline</span>
+                      <br>
+                       <span><strong>IP: </strong> {{instanceIp}}</span>
+                       <span><strong>Password</strong> {{initialAdminPassword}}</span>
+                      </div>
+                </div>
                   <div class="row">
                       <mat-progress-bar *ngIf="loading" mode="buffer"></mat-progress-bar>
                   </div>
