@@ -24,11 +24,13 @@ import com.digitalonus.pipelinegenerator.vo.TestingSetupVO;
 public class TestingServiceImpl implements TestingService {
 
 	@Override
-	public void createSetupTesting(String projectId, TestingSetupVO testingVO) {
+	public String createSetupTesting(String projectId, TestingSetupVO testingVO) {
 		logger.info("SERVICE: Starting createSetupTesting method...");
 		ProjectDTO dto = this.projectService.getProjectInfoWithId(projectId);
 		if (dto == null)
 			throw new RuntimeException("Project not found with id: " + projectId);
+		
+		String instanceIp = "";
 
 		try {
 			List<String> services = new ArrayList<>();
@@ -98,9 +100,13 @@ public class TestingServiceImpl implements TestingService {
 			}
 			p.waitFor();
 			p.destroy();
+			Path ipFilePath = Paths.get(projectName + "_testing_instance.txt");
+			instanceIp = new String(Files.readAllBytes(ipFilePath), charset);
 		} catch (Exception e) {
 			logger.warn(e.getMessage());
 		}
+		
+		return instanceIp;
 
 	}
 

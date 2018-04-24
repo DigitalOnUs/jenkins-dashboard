@@ -16,6 +16,7 @@ import com.digitalonus.pipelinegenerator.controller.ConnectionController;
 import com.digitalonus.pipelinegenerator.dto.NewConnectionDTO;
 import com.digitalonus.pipelinegenerator.parser.ConnectionParser;
 import com.digitalonus.pipelinegenerator.service.ConnectionService;
+import com.digitalonus.pipelinegenerator.vo.InstanceDataVO;
 import com.digitalonus.pipelinegenerator.vo.NewConnectionVO;
 
 @RestController
@@ -25,7 +26,7 @@ public class ConnectionControllerImpl implements ConnectionController{
 
 	@Override
 	@PostMapping("/{projectId}/create-services-provider")
-	public String createConnection(@PathVariable("projectId")String projectId, 
+	public InstanceDataVO createConnection(@PathVariable("projectId")String projectId, 
 			@RequestBody NewConnectionVO connectionVO, 
 			BindingResult bindingResult) throws InterruptedException{
 		
@@ -36,17 +37,18 @@ public class ConnectionControllerImpl implements ConnectionController{
 		
 		if(logger.isTraceEnabled())
 			logger.trace("- connectionVO: " + connectionVO);
-		
+		InstanceDataVO vo = new InstanceDataVO();
 		NewConnectionDTO connectionDTO = 
 				this.connectionParser.parseToDTO(connectionVO);
 		String instanceIp = "";
 		try {
 			instanceIp = this.connectionService.createConnection(connectionDTO, projectId);
+			vo.setInstanceIp(instanceIp);
 		} catch (IOException e) {
 			throw new RuntimeException(e.getMessage());
 		}
 		
-		return instanceIp;
+		return vo;
 		
 	}
 	

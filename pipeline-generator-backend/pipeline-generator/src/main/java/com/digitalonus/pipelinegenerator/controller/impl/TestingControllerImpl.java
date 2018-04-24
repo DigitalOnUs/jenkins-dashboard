@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.digitalonus.pipelinegenerator.controller.TestingController;
 import com.digitalonus.pipelinegenerator.service.TestingService;
+import com.digitalonus.pipelinegenerator.vo.InstanceDataVO;
 import com.digitalonus.pipelinegenerator.vo.TestingSetupVO;
 
 @RestController
@@ -20,15 +21,16 @@ public class TestingControllerImpl implements TestingController {
 
 	@Override
 	@PostMapping("/{projectId}/create-setup")
-	public void createTestingSetup(
+	public InstanceDataVO createTestingSetup(
 			@PathVariable("projectId")String projectId, 
 			@RequestBody TestingSetupVO testingVO) {
 		logger.info("CTRL: Starting createTestingSetup method...");
 		if(testingVO == null)
 			throw new RuntimeException("Error, the request body must not be null");
-		
-		this.testingService.createSetupTesting(projectId, testingVO);
-		
+		InstanceDataVO vo = new InstanceDataVO(); 
+		String instanceIp = this.testingService.createSetupTesting(projectId, testingVO);
+		vo.setInstanceIp(instanceIp);
+		return vo;
 	}
 	
 	private static final Logger logger = Logger.getLogger(TestingControllerImpl.class);
