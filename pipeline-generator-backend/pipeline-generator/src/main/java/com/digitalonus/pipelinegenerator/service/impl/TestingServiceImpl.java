@@ -45,18 +45,15 @@ public class TestingServiceImpl implements TestingService {
 				services.add("\"npm install -g protractor\"");
 				services.add("\"webdriver-manager update\"");
 				services.add("\"webdriver-manager start\"");
-				services.add("\"npm install -g protractor\"");
-				services.add("\"webdriver-manager update\"");
-				services.add("\"webdriver-manager start\"");
 				testingVO.getServices().forEach(service -> {
 					if (service != null) {
 						switch (service) {
 						case "jasmine":
-							services.add("npm install -g jasmine");
-							services.add("jasmine init");
+							services.add("\"npm install -g jasmine\"");
+							services.add("\"jasmine init\"");
 							break;
 						case "mocha":
-							services.add("npm install --global mocha");
+							services.add("\"npm install --global mocha\"");
 							break;
 						}
 					}
