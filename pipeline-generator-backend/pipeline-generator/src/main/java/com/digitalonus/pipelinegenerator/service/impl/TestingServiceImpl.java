@@ -13,12 +13,14 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.digitalonus.pipelinegenerator.dto.ProjectDTO;
 import com.digitalonus.pipelinegenerator.service.ProjectService;
 import com.digitalonus.pipelinegenerator.service.TestingService;
 import com.digitalonus.pipelinegenerator.vo.TestingSetupVO;
 
+@Service
 public class TestingServiceImpl implements TestingService {
 
 	@Override
@@ -33,7 +35,7 @@ public class TestingServiceImpl implements TestingService {
 			if (testingVO != null && testingVO.getServer().equals("selenium")) {
 				services.add(
 						"\"wget http://selenium-release.storage.googleapis.com/3.0/selenium-server-standalone-3.0.1.jar\"");
-				services.add("\"screen java -jar selenium-server-standalone-3.0.1.jar -role hub\"");
+				services.add("\"nohup java -jar selenium-server-standalone-3.0.1.jar > log.txt 2> errors.txt < /dev/null &\"");
 			}
 			if (testingVO != null && testingVO.getServices().size() > 0) {
 				services.add("\"curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash\"");
