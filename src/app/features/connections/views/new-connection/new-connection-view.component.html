@@ -58,59 +58,6 @@
                     </div>
                   </form>
                 </mat-step>
-                <mat-step [editable]="false">
-                  <ng-template matStepLabel>Setup Testing</ng-template>
-                  <form [formGroup]="testingFormGroup">
-                      <div class="row">
-                          <mat-form-field>
-                            <mat-select formControlName="Server" placeholder="Server">
-                              <mat-option disabled>Choose one</mat-option>
-                              <mat-option *ngFor="let server of servers" [value]="server">
-                                {{ server.viewValue }}
-                              </mat-option>
-                            </mat-select>
-                            <mat-error *ngIf="firstFormGroup.hasError('required')">Please choose a provider</mat-error>
-                          </mat-form-field>
-                        </div>
-                        <div class="row">
-                          <mat-form-field>
-                            <mat-select formControlName="Framework" placeholder="Framework">
-                              <mat-option disabled>Choose one</mat-option>
-                              <mat-option *ngFor="let framework of frameworks" [value]="framework">
-                                {{ framework.viewValue }}
-                              </mat-option>
-                            </mat-select>
-                            <mat-error *ngIf="firstFormGroup.hasError('required')">Please choose a provider</mat-error>
-                          </mat-form-field>
-                        </div>
-                        <div class="row">
-                          <mat-form-field>
-                            <mat-select formControlName="WebDriver" placeholder="Webdriver">
-                              <mat-option disabled>Choose one</mat-option>
-                              <mat-option *ngFor="let webdriver of webdrivers" [value]="webdriver">
-                                {{ webdriver.viewValue }}
-                              </mat-option>
-                            </mat-select>
-                            <mat-error *ngIf="firstFormGroup.hasError('required')">Please choose a provider</mat-error>
-                          </mat-form-field>
-                        </div>
-                        <div class="row">
-                          <div class="input-field col s3">
-                            <input formControlName="ServerInfo" id="ip" type="text" class="validate">
-                            <label for="ip">Ip</label>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="input-field col s3">
-                            <input id="port" formControlName="PortInfo" type="number" class="validate">
-                            <label for="port">Port</label>
-                          </div>
-                        </div>
-                  </form>
-                  <div class="row">
-                      <button class="btn btn-primary" mat-button matStepperNext>Next</button>
-                    </div>
-                </mat-step>
                 <mat-step>
                   <ng-template matStepLabel>Save</ng-template>
                   <div class="row">
@@ -136,7 +83,7 @@
                       <span>Need one more step, you need to go to ip and configure jenkins then you'll can create a pipeline</span>
                       <br>
                        <span><strong>IP: </strong> {{instanceIp}}</span>
-                       <span><strong>Password</strong> {{initialAdminPassword}}</span>
+                       <span *ngIf="initialAdminPassword"><strong>Password</strong> {{initialAdminPassword}}</span>
                       </div>
                 </div>
                   <div class="row">

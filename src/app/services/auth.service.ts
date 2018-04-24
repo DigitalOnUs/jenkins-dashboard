@@ -9,6 +9,7 @@ import { toast } from 'angular2-materialize';
 export class AuthService {
   isLoading: boolean;
   user: User;
+  public idToken;
 
   constructor(public afAuth: AngularFireAuth, private router: Router) {
     this.isLoading = true;
@@ -17,6 +18,7 @@ export class AuthService {
       this.isLoading = false;
       console.log('User Logged');
     });
+    this.afAuth.idToken.subscribe(data => (this.idToken = data));
   }
   get authenticated() {
     return this.user;

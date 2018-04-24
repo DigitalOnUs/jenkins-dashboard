@@ -25,8 +25,8 @@ export class ProjectsViewComponent implements OnInit {
     ];
     //TODO: Get request from backend
     this.projectService
-      .getAllProject()
-      .subscribe(projects => (this.projects = projects));
+      .getAllProject(this.authService.user.email)
+      .subscribe((projects: any) => (this.projects = projects));
   }
 
   constructor(

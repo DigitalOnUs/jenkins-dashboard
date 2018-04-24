@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -14,10 +14,11 @@ export class ProjectService {
     this.url = 'http://54.193.81.209:8080';
   }
 
-  getAllProject() {
-    return this.http
-      .get(this.url + '/project')
-      .map((projects: Response) => projects.json());
+  getAllProject(userMail: any) {
+    let params = new HttpParams().set('userEmail', userMail);
+    return this.httpClient.get(this.url + '/project', {
+      params: params
+    });
   }
 
   createProject(project: any) {
