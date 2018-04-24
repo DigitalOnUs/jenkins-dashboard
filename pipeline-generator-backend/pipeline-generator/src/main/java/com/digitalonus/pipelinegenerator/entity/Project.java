@@ -15,6 +15,15 @@ public class Project {
 	private String name;
 	@DBRef
 	private List<Step> steps;
+	private String userEmail;
+
+	public String getUserEmail() {
+		return userEmail;
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
 
 	public String getId() {
 		return id;

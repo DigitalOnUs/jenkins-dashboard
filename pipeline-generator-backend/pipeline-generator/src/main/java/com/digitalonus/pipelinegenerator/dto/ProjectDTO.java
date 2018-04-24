@@ -10,6 +10,15 @@ public class ProjectDTO {
 	private ObjectId id;
 	private String name;
 	private List<StepDTO> steps;
+	private String userEmail;
+
+	public String getUserEmail() {
+		return userEmail;
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
 
 	public ObjectId getId() {
 		return id;

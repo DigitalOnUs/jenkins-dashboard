@@ -23,6 +23,7 @@ public class ProjectParserImpl implements ProjectParser {
 		ProjectVO projectVO = new ProjectVO();
 		projectVO.setId(projectDTO.getId().toString());
 		projectVO.setName(projectDTO.getName());
+		projectVO.setUserEmail(projectDTO.getUserEmail());
 		projectVO.setSteps(this.stepParser.parseToVOList(projectDTO.getSteps()));
 		return projectVO;
 	}
@@ -38,6 +39,7 @@ public class ProjectParserImpl implements ProjectParser {
 		if (projectVO.getId() != null)
 			projectDTO.setId(new ObjectId(projectVO.getId()));
 		projectDTO.setName(projectVO.getName());
+		projectDTO.setUserEmail(projectVO.getUserEmail());
 		return projectDTO;
 	}
 

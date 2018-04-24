@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.digitalonus.pipelinegenerator.dto.ProjectDTO;
 import com.digitalonus.pipelinegenerator.entity.Project;
 import com.digitalonus.pipelinegenerator.persistance.ProjectDAO;
@@ -43,6 +42,7 @@ public class ProjectServiceImpl implements ProjectService {
 		Project project = new Project();
 		project.setId(projectDTO.getId().toString());
 		project.setName(projectDTO.getName());
+		project.setUserEmail(projectDTO.getUserEmail());
 		try {
 			this.projectDAO.save(project);
 		} catch (Exception e) {
@@ -52,13 +52,14 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public List<ProjectDTO> getAll() {
+	public List<ProjectDTO> getProjectsWithEmail(String userEmail) {
 		List<ProjectDTO> projectsDTO = new ArrayList<>();
-		List<Project> projects = this.projectDAO.findAll();
+		List<Project> projects = this.projectDAO.findAllByUserEmail(userEmail);
 		for(Project project : projects) {
 			ProjectDTO dto = new ProjectDTO();
 			dto.setId(new ObjectId(project.getId()));
 			dto.setName(project.getName());
+			dto.setUserEmail(project.getUserEmail());
 			projectsDTO.add(dto);
 		}
 		return projectsDTO;

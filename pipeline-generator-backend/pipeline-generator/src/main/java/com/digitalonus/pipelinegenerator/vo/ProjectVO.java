@@ -17,6 +17,7 @@ public class ProjectVO {
 	@NotEmpty
 	private String name;
 	private List<StepVO> steps;
+	private String userEmail;
 
 	public String getId() {
 		return id;
@@ -42,9 +43,17 @@ public class ProjectVO {
 		this.steps = steps;
 	}
 
+	public String getUserEmail() {
+		return userEmail;
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+
 	@Override
 	public String toString() {
 		return new GsonSingleton().getInstance().toJson(this);
 	}
-	
+
 }

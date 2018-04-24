@@ -35,7 +35,8 @@ public class TestingServiceImpl implements TestingService {
 			if (testingVO != null && testingVO.getServer().equals("selenium")) {
 				services.add(
 						"\"wget http://selenium-release.storage.googleapis.com/3.0/selenium-server-standalone-3.0.1.jar\"");
-				services.add("\"nohup java -jar selenium-server-standalone-3.0.1.jar > log.txt 2> errors.txt < /dev/null &\"");
+				services.add(
+						"\"nohup java -jar selenium-server-standalone-3.0.1.jar > log.txt 2> errors.txt < /dev/null &\"");
 			}
 			if (testingVO != null && testingVO.getServices().size() > 0) {
 				services.add("\"curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash\"");
@@ -44,15 +45,18 @@ public class TestingServiceImpl implements TestingService {
 				services.add("\"npm install -g protractor\"");
 				services.add("\"webdriver-manager update\"");
 				services.add("\"webdriver-manager start\"");
-
+				services.add("\"npm install -g protractor\"");
+				services.add("\"webdriver-manager update\"");
+				services.add("\"webdriver-manager start\"");
 				testingVO.getServices().forEach(service -> {
 					if (service != null) {
 						switch (service) {
-						case "protractor":
-							services.add(
-									"\"npm install -g protractor\"");
-							services.add("\"webdriver-manager update\"");
-							services.add("\"webdriver-manager start\"");
+						case "jasmine":
+							services.add("npm install -g jasmine");
+							services.add("jasmine init");
+							break;
+						case "mocha":
+							services.add("npm install --global mocha");
 							break;
 						}
 					}
