@@ -1,6 +1,7 @@
 # Welcome to Continuous Delivery Platform App!
 
-@Angular-ci
+## @Angular-ci
+
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/angular2-ci.svg)](https://saucelabs.com/u/angular2-ci)
 
 _Safari (7+), iOS (7+) and IE mobile (11) are tested on [BrowserStack][browserstack]._
@@ -17,7 +18,11 @@ _Safari (7+), iOS (7+) and IE mobile (11) are tested on [BrowserStack][browserst
 * RxJS Library
 * MomentJS Library
 * Angular2firebase
-* Google Cloud Platform - Firebase Authetication - Firebase Hosting - Firebase Functions - Firebase Cloud Firestorage
+* Google Cloud Platform
+  * Firebase Authetication
+  * Firebase Hosting
+  * Firebase Functions
+  * Firebase Cloud Firestorage
 
 ## Prerequisites
 
