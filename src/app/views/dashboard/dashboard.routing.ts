@@ -15,6 +15,11 @@ export const ROUTES: Routes = [
           '../../features/connections/connections.routing#ConnectionsRouting'
       },
       {
+        path: 'setup',
+        loadChildren:
+          '../../features/testing/setup-testing.routing#SetupTestingRouting'
+      },
+      {
         path: 'pipeline',
         loadChildren:
           '../../features/pipeline-generator/pipeline-generator.routing#PipelineGeneratorRouting'
@@ -22,11 +27,11 @@ export const ROUTES: Routes = [
       {
         path: 'jenkins',
         loadChildren:
-        '../../features/jenkins-status/jenkins-status-view.routing#JenkinsStatusRouting'
-      }, {
+          '../../features/jenkins-status/jenkins-status-view.routing#JenkinsStatusRouting'
+      },
+      {
         path: 'profile',
-        loadChildren:
-        '../../features/profile/profile.routing#ProfileRouting'
+        loadChildren: '../../features/profile/profile.routing#ProfileRouting'
       }
     ]
   }

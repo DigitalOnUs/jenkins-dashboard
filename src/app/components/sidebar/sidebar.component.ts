@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../../services/project.service';
 import { ActivatedRoute } from '@angular/router';
-
 declare const $: any;
 declare interface RouteInfo {
   path: string;
@@ -14,6 +13,12 @@ export const ROUTES: RouteInfo[] = [
     path: 'connections/new',
     title: 'Setup Provider',
     icon: 'dashboard',
+    class: ''
+  },
+  {
+    path: 'setup/testing',
+    title: 'Setup Testing',
+    icon: 'sort',
     class: ''
   },
   {
@@ -44,9 +49,7 @@ export class SidebarComponent implements OnInit {
     private projectService: ProjectService,
     private router: ActivatedRoute
   ) {
-    this.router.parent.params.subscribe(
-      params => (this.projectId = params.id)
-    );
+    this.router.parent.params.subscribe(params => (this.projectId = params.id));
   }
 
   ngOnInit() {

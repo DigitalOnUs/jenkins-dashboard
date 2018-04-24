@@ -17,7 +17,6 @@ export class ProjectsViewComponent implements OnInit {
   id: number;
 
   ngOnInit(): void {
-    this.id = 2;
     // TODO: Catalog from backend
     this.regionToNewProjectForm = [
       { name: 'United States' },
@@ -37,7 +36,8 @@ export class ProjectsViewComponent implements OnInit {
     private authService: AuthService
   ) {
     $(document).ready(function() {
-      // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+      // the "href" attribute of the modal trigger must specify the modal
+      // ID that wants to be triggered
       $('.modal').modal();
     });
     this.form = fb.group({
@@ -49,7 +49,11 @@ export class ProjectsViewComponent implements OnInit {
 
   addNewProject() {
     this.projectService
-      .createProject(Object.assign({}, this.form.value))
+      .createProject(
+        Object.assign({}, this.form.value, {
+          userEmail: this.authService.user.email
+        })
+      )
       .subscribe(project => this.projects.push(project));
     this.form.reset();
   }

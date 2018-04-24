@@ -9,6 +9,7 @@ import { toast } from 'angular2-materialize';
 export class AuthService {
   isLoading: boolean;
   user: User;
+
   constructor(public afAuth: AngularFireAuth, private router: Router) {
     this.isLoading = true;
     this.afAuth.authState.subscribe(data => {

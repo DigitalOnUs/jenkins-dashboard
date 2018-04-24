@@ -1,0 +1,58 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="blue">
+                        <h4 class="title">Setup Continuous Testing</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="row">
+                            <form [formGroup]="firstFormGroup">
+                                <mat-vertical-stepper [linear]="true" #stepper="matVerticalStepper">
+                                    <mat-step >
+                                            <ng-template matStepLabel>Funcionality Testing</ng-template>
+                                            <div class="row">
+                                              <mat-slide-toggle formControlName="server">Selenium</mat-slide-toggle>
+                                            </div>
+                                            <div class="row">
+                                                <div>
+                                                    <button class="btn btn-info" mat-button matStepperNext>Next</button>
+                                                </div>
+                                            </div>
+
+                                    </mat-step>
+                                    <mat-step>
+                                        <ng-template matStepLabel>Framework</ng-template>
+                                        <div class="row">
+                                          <mat-slide-toggle formControlName="cucumber">Cucumber</mat-slide-toggle>
+                                        </div>
+                                        <div class="row">
+                                          <mat-slide-toggle formControlName="moncha">Moncha</mat-slide-toggle>
+                                        </div>
+                                        <div class="row">
+                                          <mat-slide-toggle formControlName="jasmine">Jasmine</mat-slide-toggle>
+                                        </div>
+
+                                        <button class="btn btn-danger" mat-button matStepperPrevious>Back</button>
+                                        <button class="btn btn-info" mat-button matStepperNext>Next</button>
+
+                                    </mat-step>
+                                    <mat-step>
+                                        <ng-template matStepLabel>Done</ng-template>
+                                        You are ready to save
+                                        <div>
+                                            <button class="btn btn-danger" mat-button matStepperPrevious>Back</button>
+                                            <button class="btn btn-success" mat-button (click)="saveSetupTesting()">Send</button>
+                                        </div>
+                                    </mat-step>
+                                </mat-vertical-stepper>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
